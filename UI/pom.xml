@@ -13,7 +13,7 @@
 	<artifactId>FS_UI</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>fs</name>
+	<name>fs ui</name>
 	<description>Finance Solutions UI</description>
 	<properties>
 		<java.version>1.8</java.version>
