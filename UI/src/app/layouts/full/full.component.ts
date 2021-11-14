@@ -28,7 +28,7 @@ export class FullComponent implements OnInit {
   options = {
     theme: 'light', // two possible values: light, dark
     dir: 'ltr', // two possible values: ltr, rtl
-    layout: 'vertical', // two possible values: vertical, horizontal
+    layout: 'horizontal', // two possible values: vertical, horizontal
     sidebartype: 'full', // four possible values: full, iconbar, overlay, mini-sidebar
     sidebarpos: 'fixed', // two possible values: fixed, absolute
     headerpos: 'fixed', // two possible values: fixed, absolute
