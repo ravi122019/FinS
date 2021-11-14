@@ -21,30 +21,126 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
+	<dependencies>
+	 <dependency> 
+            <groupId>com</groupId> 
+            <artifactId>FS_UI</artifactId> 
+            <version>0.0.1-SNAPSHOT</version> 
+            <type>jar</type> 
+        </dependency> 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+        	<groupId>org.mapstruct</groupId>
+        	<artifactId>mapstruct</artifactId>
+        	<version>1.4.2.Final</version>
+    	</dependency>
+    	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		<dependency>
+    		<groupId>io.jsonwebtoken</groupId>
+    		<artifactId>jjwt</artifactId>
+    		<version>0.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-jdbc</artifactId>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5.1</version>
 				<configuration>
-					<source>1.8</source> <!-- depending on your project. In this example, Java 1.8 is used -->
-					<target>1.8</target> <!-- depending on your project. In this example, Java 1.8 is used -->
+                <source>1.8</source> <!-- depending on your project. In this example, Java 1.8 is used -->
+                <target>1.8</target> <!-- depending on your project. In this example, Java 1.8 is used -->
 					<annotationProcessorPaths>
 						<path>
-							<groupId>org.mapstruct</groupId>
+							<groupId>org.mapstruct</groupId> 
 							<artifactId>mapstruct-processor</artifactId>
 							<version>1.3.1.Final</version>
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
+			 <plugin> 
+                <groupId>org.springframework.boot</groupId> 
+                <artifactId>spring-boot-maven-plugin</artifactId> 
+                <version>2.4.3</version> 
+                <configuration> 
+                    <mainClass>dev.marco.example.springboot.Application</mainClass> 
+                </configuration> 
+                <executions> 
+                    <execution> 
+                        <goals> 
+                            <goal>repackage</goal> 
+                        </goals> 
+                    </execution> 
+                </executions> 
+            </plugin> 
+ 
+            <plugin> 
+                <groupId>org.apache.maven.plugins</groupId> 
+                <artifactId>maven-dependency-plugin</artifactId> 
+                <version>3.1.2</version> 
+                <executions> 
+                    <execution> 
+                        <id>merge</id> 
+                        <phase>initialize</phase> 
+                        <goals> 
+                            <goal>unpack</goal> 
+                        </goals> 
+                        <configuration> 
+                            <artifactItems> 
+                                <artifactItem> 
+                                    <groupId>com</groupId> 
+                                    <artifactId>FS_UI</artifactId> 
+                                    <type>jar</type> 
+                                    <overWrite>true</overWrite> 
+                                    <outputDirectory>${project.build.directory}/classes/static</outputDirectory> 
+                                </artifactItem> 
+                            </artifactItems> 
+                        </configuration> 
+                    </execution> 
+                </executions> 
+            </plugin> 
 		</plugins>
 	</build>
-
 </project>
