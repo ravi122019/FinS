@@ -48,7 +48,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: [
       {
         path: "/dashboard/dashboard1",
-        title: "Minimal",
+        title: "Customer Accounts",
         icon: "mdi mdi-adjust",
         class: "",
         ddclass: "",
@@ -57,7 +57,7 @@ export const ROUTES: RouteInfo[] = [
       },
       {
         path: "/dashboard/dashboard2",
-        title: "Analytical",
+        title: "Employee Details",
         icon: "mdi mdi-adjust",
         class: "",
         ddclass: "",
@@ -66,7 +66,24 @@ export const ROUTES: RouteInfo[] = [
       },
       {
         path: "/dashboard/dashboard3",
-        title: "Demographical",
+        title: "Loan Group",
+        icon: "mdi mdi-adjust",
+        class: "",
+        ddclass: "",
+        extralink: false,
+        submenu: [],
+      },{
+        path: "/dashboard/dashboard3",
+        title: "Employee Designations",
+        icon: "mdi mdi-adjust",
+        class: "",
+        ddclass: "",
+        extralink: false,
+        submenu: [],
+      },
+      {
+        path: "/dashboard/dashboard3",
+        title: "Location Details",
         icon: "mdi mdi-adjust",
         class: "",
         ddclass: "",
