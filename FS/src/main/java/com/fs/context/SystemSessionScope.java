@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import com.fs.pojo.Firm;
+
 public class SystemSessionScope implements SessionScope<Map<String, Object>>{
 
 	private Map<String, Object> session = new HashMap<String, Object>();
@@ -40,6 +42,30 @@ public class SystemSessionScope implements SessionScope<Map<String, Object>>{
 
 	public void setSessionId(String newSessionId) {
 		this.sessionId=newSessionId;
+	}
+
+	@Override
+	public Long getFirmId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Long getUserId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getLoginName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Firm getFirm() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -21,5 +21,4 @@ public interface Service<T> {
 	void deleteAll(List<T> entites);
 
 	Page<T> getPageList(Example<T> example, Pageable pageable);
-
 }

@@ -19,5 +19,10 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService{
 	protected JpaRepository<User, Long> getRepo() {
 		return userRepo;
 	}
+	
+	@Override
+	public User getUserByUserName(String loginName) {
+		return userRepo.findByLoginName(loginName).get();
+	}
 
 }

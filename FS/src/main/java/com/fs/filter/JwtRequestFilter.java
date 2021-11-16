@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.fs.repos.UserRepo;
+import com.fs.context.HttpServletFSContext;
 import com.fs.services.base.FSUserLoginDetailsService;
 import com.fs.utils.JwtUtil;
 
@@ -26,9 +26,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 	@Autowired
 	private JwtUtil jwtUtil;
-
-	@Autowired
-	private UserRepo userRepo;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
@@ -43,9 +40,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			jwt = authorizationHeader.substring(7);
 			username = jwtUtil.extractUsername(jwt);
 		}
-
+		
+		HttpServletFSContext.newInstance(request);
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
 			UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 
 			if (jwtUtil.validateToken(jwt, userDetails)) {
@@ -54,11 +51,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 				usernamePasswordAuthenticationToken
 						.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-				/*
-				 * AppSessionContext.CURRENT_USERS.put(AppSessionContext.currentLoginName(),
-				 * apploginRepo.findByLogiName(AppSessionContext.currentLoginName()).orElse(null
-				 * ));
-				 */
 			}
 		}
 		chain.doFilter(request, response);

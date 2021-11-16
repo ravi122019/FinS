@@ -23,6 +23,10 @@ import com.fs.pojo.base.Trackable;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class TrackableImpl implements Trackable, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2938369090392744029L;
 	@LastModifiedDate
     @Temporal(TIMESTAMP)
 	private Date modifiedTimeStamp;

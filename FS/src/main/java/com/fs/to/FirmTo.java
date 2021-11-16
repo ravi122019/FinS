@@ -1,67 +1,53 @@
-package com.fs.pojo;
+package com.fs.to;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fs.to.base.BaseTo;
 
-import com.fs.pojo.base.impl.TrackableImpl;
+public class FirmTo extends BaseTo {
 
-@Entity
-@Table(name = "FSFIRM", uniqueConstraints = @UniqueConstraint(columnNames = "id"))
-public class Firm extends TrackableImpl {
-	/**
-	* 
-	*/
-	private static final long serialVersionUID = 4258662000826957318L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonProperty("id")
 	private Long id;
 
-	@Column(name = "Name", nullable = false, unique = false)
+	@JsonProperty("name")
 	private String name;
 
-	@Column(name = "MobileNumber", nullable = false, unique = false)
+	@JsonProperty("mobileNumber")
 	private String mobileNumber;
 
-	@Column(name = "EmailId", nullable = false, unique = false)
+	@JsonProperty("emailId")
 	private String emailId;
 
-	@Column(name = "City", nullable = false, unique = false)
+	@JsonProperty("city")
 	private String city;
 
-	@Column(name = "State", nullable = false, unique = false)
+	@JsonProperty("state")
 	private String state;
 
-	@Column(name = "Address", nullable = false, unique = false)
+	@JsonProperty("address")
 	private String address;
 
-	@Column(name = "RegistrationId", nullable = true, unique = false)
+	@JsonProperty("registrationId")
 	private String registrationId;
 
-	@Column(name = "Pancard", nullable = true, unique = false)
+	@JsonProperty("pancard")
 	private String pancard;
 
-	@Column(name = "RegistrationDate", nullable = false, unique = false)
+	@JsonProperty("registrationDate")
 	private Date registrationDate;
 
-	@Column(name = "ReNewDueDate", nullable = false, unique = false)
+	@JsonProperty("reNewDueDate")
 	private Date reNewDueDate;
 
-	@Column(name = "MyReferralCode", nullable = true, unique = false)
+	@JsonProperty("myReferralCode")
 	private String myReferralCode;
 
-	@Column(name = "ReferredBy", nullable = true, unique = false)
+	@JsonProperty("referredBy")
 	private String referredBy;
 
-	@Column(name = "IsActive", nullable = false, unique = false)
-	private Boolean isActive = false;
+	@JsonProperty("isActive")
+	private Boolean isActive;
 
 	public Long getId() {
 		return id;

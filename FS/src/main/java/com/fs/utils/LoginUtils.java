@@ -19,7 +19,7 @@ public class LoginUtils {
 			    req.put(name, request.getAttribute(name));
 			}
 		}
-		//req.setRemoteAddress(remoteAddress);
+		// This is for future use to log request IP - address req.setRemoteAddress(remoteAddress);
 		
 		Cookie[] cookies = request.getCookies();
 		

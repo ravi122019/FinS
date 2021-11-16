@@ -18,7 +18,7 @@ public class FSUserLoginDetailsService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String loginName) throws UsernameNotFoundException {
-		Optional<User> loginUser = userRepo.findByUserName(loginName);
+		Optional<User> loginUser = userRepo.findByLoginName(loginName);
 		loginUser.orElseThrow(()-> new UsernameNotFoundException("User Not found with given login name "+ loginName));
 		return loginUser.map(FSUserLoginDetails::new).orElse(null);
 		

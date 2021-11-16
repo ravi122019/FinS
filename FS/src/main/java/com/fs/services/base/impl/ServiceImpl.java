@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.fs.exceptions.ObjectNotFoundException;
 import com.fs.services.base.Service;
 
 public abstract class ServiceImpl<T> implements Service<T>{
@@ -25,7 +26,9 @@ protected abstract JpaRepository<T, Long> getRepo();
 	
 	@Override
 	public T findById(Long id) {
-		return getRepo().findById(id).orElse(null);
+		//TODO: Move below hard coded message in properties file
+		return getRepo().findById(id)
+				.orElseThrow(() -> new ObjectNotFoundException("Object not found for given id :" + id));
 	}
 
 	@Override
