@@ -21,7 +21,7 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService{
 	}
 	
 	@Override
-	public User getUserByUserName(String loginName) {
+	public User getUserByLoginName(String loginName) {
 		return userRepo.findByLoginName(loginName).get();
 	}
 

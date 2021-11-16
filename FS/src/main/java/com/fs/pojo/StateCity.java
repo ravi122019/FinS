@@ -10,14 +10,9 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="FSSTATECITY", uniqueConstraints = @UniqueConstraint(columnNames = {"state", "city"}))
+@Table(name="FSSTATECITY", uniqueConstraints = @UniqueConstraint(columnNames = {"state","district", "city"}))
 public class StateCity {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7669284695939102858L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -25,6 +20,10 @@ public class StateCity {
 	@NotNull(message = "State should not be null")
 	@Column(name = "State")
 	private String state;
+	
+	@NotNull(message = "District should not be null")
+	@Column(name = "District")
+	private String district;
 	
 	@NotNull(message = "City should not be null")
 	@Column(name = "City")
@@ -53,4 +52,13 @@ public class StateCity {
 	public void setCity(String city) {
 		this.city = city;
 	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+	
 }

@@ -71,7 +71,7 @@ public class UserController extends  BaseController<UserTo, User>{
 		try {
 			authenticationManager
 					.authenticate(new UsernamePasswordAuthenticationToken(userInfo.getLoginName(), userInfo.getPassword()));
-			user = userService.getUserByUserName(userInfo.getLoginName());
+			user = userService.getUserByLoginName(userInfo.getLoginName());
 		} catch (BadCredentialsException e) {
 			return new ResponseEntity<Object>(new String("UserName or Password is incorrect."), HttpStatus.BAD_REQUEST);
 		}

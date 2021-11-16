@@ -35,6 +35,9 @@ public class Firm extends TrackableImpl {
 
 	@Column(name = "City", nullable = false, unique = false)
 	private String city;
+	
+	@Column(name = "District",nullable = false, unique = false)
+	private String district;
 
 	@Column(name = "State", nullable = false, unique = false)
 	private String state;
@@ -173,5 +176,13 @@ public class Firm extends TrackableImpl {
 
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 }

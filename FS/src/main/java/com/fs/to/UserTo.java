@@ -38,6 +38,9 @@ public class UserTo extends BaseTo{
 	@JsonProperty("state")
 	private String state;
 	
+	@JsonProperty("district")
+	private String district;
+	
 	@JsonProperty("city")
 	private String city;
 	
@@ -215,5 +218,13 @@ public class UserTo extends BaseTo{
 
 	public void setDesignation(DesignationTo designation) {
 		this.designation = designation;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 }

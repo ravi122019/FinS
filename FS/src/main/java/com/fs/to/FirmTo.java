@@ -24,6 +24,9 @@ public class FirmTo extends BaseTo {
 
 	@JsonProperty("state")
 	private String state;
+	
+	@JsonProperty("district")
+	private String district;
 
 	@JsonProperty("address")
 	private String address;
@@ -159,5 +162,13 @@ public class FirmTo extends BaseTo {
 
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 }

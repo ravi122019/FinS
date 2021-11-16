@@ -5,7 +5,7 @@ import com.fs.services.base.Service;
 
 public interface UserService extends Service<User>{
 
-	User getUserByUserName(String loginName);
+	User getUserByLoginName(String loginName);
 	
 
 }

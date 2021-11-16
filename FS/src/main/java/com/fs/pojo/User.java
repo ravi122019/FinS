@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
@@ -26,7 +25,7 @@ public class User extends FirmAwareImpl{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@NotNull(message = "userName should not be null")
+	@NotNull(message = "LoginName should not be null")
 	@Column(name = "LoginName")
 	private String loginName;
 	
@@ -58,6 +57,9 @@ public class User extends FirmAwareImpl{
 	
 	@Column(name = "State" , nullable = false, unique = false)
 	private String state;
+	
+	@Column(name = "District",nullable = false, unique = false)
+	private String district;
 	
 	@Column(name = "City" , nullable = false, unique = false)
 	private String city;
@@ -248,4 +250,13 @@ public class User extends FirmAwareImpl{
 	public void setDesignation(Designation designation) {
 		this.designation = designation;
 	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+	
 }
