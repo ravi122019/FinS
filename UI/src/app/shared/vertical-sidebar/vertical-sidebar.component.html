@@ -29,8 +29,7 @@
                 <!-- <i [ngClass]="[sidebarnavItem.icon]"></i> -->
                 <i-feather [name]="sidebarnavItem.icon" [ngClass]="[sidebarnavItem.icon]"></i-feather>
                 <span class="hide-menu">{{sidebarnavItem.title | translate}}
-                    <span *ngIf="sidebarnavItem.label != '' "
-                        [ngClass]="[sidebarnavItem.labelClass]">{{sidebarnavItem.label | translate}}</span>
+                    <span *ngIf="sidebarnavItem.label != '' " >{{sidebarnavItem.label | translate}}</span>
                 </span>
             </a>
             <!-- Second level menu -->
