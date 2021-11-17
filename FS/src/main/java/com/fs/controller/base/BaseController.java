@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,11 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fs.services.base.Service;
 import com.fs.utils.DataBinderUtil;
 import com.fs.utils.QueryParamUtil;
-
+@Validated
 public abstract class BaseController<B, D> {
 
-	protected abstract Example<D> getExample(Map<String, String> map);
-	
 	protected abstract Service<D> getService();
 	
 	@SuppressWarnings("rawtypes")
@@ -76,9 +76,8 @@ public abstract class BaseController<B, D> {
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@RequestMapping(path = "/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> update(@RequestBody B object, @PathVariable Long id){
+	public ResponseEntity<Object> update(@Valid @RequestBody B object, @PathVariable Long id){
 		D d = getService().findById(id);
 		BeanUtils.copyProperties(object, d);
 		QueryParamUtil.setFirmData(d);

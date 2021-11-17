@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.servlet.http.HttpSession;
 
+import com.fs.pojo.Firm;
+
 public class HttpSessionScope  implements SessionScope<HttpSession>{
 
 	
@@ -41,6 +43,24 @@ public class HttpSessionScope  implements SessionScope<HttpSession>{
 	
 	public void setSession(HttpSession session) {
 		this.session=session;
+	}
+
+	@Override
+	public Long getFirmId() {
+		return (Long) session.getAttribute(FIRM_ID);
+	}
+	@Override
+	public Long getUserId() {
+		return (Long) session.getAttribute(USER_ID);
+	}
+	@Override
+	public String getLoginName() {
+		return (String) session.getAttribute(LOGIN_NAME);
+	}
+
+	@Override
+	public Firm getFirm() {
+		return (Firm) session.getAttribute(FIRM);
 	}
 
 }

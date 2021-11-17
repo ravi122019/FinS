@@ -24,7 +24,7 @@ public class FSUserLoginDetails implements UserDetails {
 		
 	};
 	public FSUserLoginDetails(User loginUser) {
-		this.userName=loginUser.getUserName();
+		this.userName=loginUser.getLoginName();
 		this.password=loginUser.getPassword();
 	}
 

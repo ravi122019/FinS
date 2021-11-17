@@ -22,17 +22,17 @@ public class HttpServletFSContext extends FSContext{
 	@Override
 	public SessionScope<?> getSession(boolean create) {
 		HttpSession session = request.getSession(create);
-		if(sessionScope == null) {
+		if (sessionScope == null) {
 			sessionScope = new HttpSessionScope(session);
-		} 
+		}
 		sessionScope.setSession(session);
-		
-		if(null == session) { 
+
+		if (null == session) {
 			this.sessionId = null;
 		}
-		
-		if(null != session && (null == sessionId || false == session.equals(session.getId()))) {
-			this.sessionId=session.getId();
+
+		if (null != session && (null == sessionId || false == session.equals(session.getId()))) {
+			this.sessionId = session.getId();
 		}
 		return null == session ? null : sessionScope;
 	}
@@ -44,12 +44,11 @@ public class HttpServletFSContext extends FSContext{
 			
 			try {
 				contextLock.lock();
-				sessionScope.getSource().invalidate();
+				session.invalidate();
 				
 			} finally {
 				contextLock.unlock();
 			}
-			session.invalidate();
 			this.sessionId=null;
 		}
 	}

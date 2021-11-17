@@ -16,6 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.fs.filter.JwtRequestFilter;
 import com.fs.services.base.FSUserLoginDetailsService;
 
+@SuppressWarnings("deprecation")
 @EnableWebSecurity
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
@@ -33,21 +34,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		/*http
+		http
 		.csrf().disable()
 		.authorizeRequests()
 			.antMatchers(HttpMethod.OPTIONS).permitAll()
-			.antMatchers("/login/authenticate").permitAll()
-			.antMatchers("/login/addLogin").permitAll()
-			.antMatchers("/fs/firm/getPageList").permitAll()
+			.antMatchers("/user/authenticate").permitAll()
+			.antMatchers("/firm/").permitAll()
 			.antMatchers("/appResetPassword/sendOTP/*").permitAll()
 			.antMatchers("/appResetPassword/resetPassword/").permitAll()
 			.anyRequest(). authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
 	http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-*/	
-			http.csrf().disable();
-	        http.authorizeRequests().antMatchers("/getPageList","/fs/firm").permitAll();
-	          
 			
 	}
 	

@@ -9,6 +9,6 @@ import com.fs.repos.base.BaseRepo;
 @Repository
 public interface UserRepo extends BaseRepo<User, Long>{
 
-	Optional<User> findByUserName(String loginName);
+	Optional<User> findByLoginName(String loginName);
 
 }

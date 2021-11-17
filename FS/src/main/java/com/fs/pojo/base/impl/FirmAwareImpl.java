@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 import com.fs.pojo.Firm;
 import com.fs.pojo.base.FirmAware;
@@ -15,16 +16,16 @@ public class FirmAwareImpl extends TrackableImpl implements FirmAware, Serializa
 	
 	private static final long serialVersionUID = -1869322062604104688L;
 
-	private static String FIRM_ID="firm.id";
-	
+	@NotNull(message="Firm Should be not null for user")
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="FirmID", nullable = false, updatable = false)
 	private Firm firm;
 	
+	@Override
 	public Firm getFirm() {
 		return firm;
 	}
-
+	@Override
 	public void setFirm(Firm firm) {
 		this.firm = firm;
 	}

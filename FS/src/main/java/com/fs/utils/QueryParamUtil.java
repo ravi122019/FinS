@@ -10,10 +10,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import com.fs.context.FSContext;
+import com.fs.context.SessionScope;
 import com.fs.pojo.base.FirmAware;
 
 public final class QueryParamUtil {
 
+	@SuppressWarnings("rawtypes")
 	public static Example getExampleObject(Class clz, Map<String, String> map) {
 		BeanWrapper src = new BeanWrapperImpl(clz);
 		String crit = map.get("crit");
@@ -31,7 +34,7 @@ public final class QueryParamUtil {
 		Object obj = src.getWrappedInstance();
 		if(obj instanceof FirmAware) {
 			FirmAware firm = (FirmAware) obj;
-			firm.setFirmId(29l);
+			firm.setFirmId(FSContext.getFirmId());
 			firm.setDeleteStatus(Boolean.FALSE);
 			return Example.of(firm);
 		}
@@ -40,17 +43,17 @@ public final class QueryParamUtil {
 	}
 	
 	public static Pageable getPageable(Map<String, String> map) {
-		//limit=value
+		//TODO:limit=value
 		//offset=value
 		//sort=
 		return PageRequest.of(0, 25, Sort.by("id"));
 		
 	}
-	//We will remove this method and will add advice for this
+	//TODO:We will remove this method and will add advice for this
 	public static void setFirmData(Object object) {
 		if(object instanceof FirmAware) {
-			FirmAware firm = (FirmAware) object;
-			firm.setFirmId(29l);
+			FirmAware obj = (FirmAware) object;
+			obj.setFirm(FSContext.getFirm());
 		}
 	}
 }

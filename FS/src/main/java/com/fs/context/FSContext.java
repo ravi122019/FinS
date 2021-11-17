@@ -5,6 +5,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.fs.pojo.Firm;
+import com.fs.pojo.User;
+
 
 public abstract class FSContext {
 
@@ -59,13 +62,16 @@ public abstract class FSContext {
 		return current();
 	}
 	
-	public static SessionScope<?> createAuthenticatedSession(String principal){
+	public static SessionScope<?> createAuthenticatedSession(User user){
 		final FSContext context = current();
 		SessionScope<?> session = null;
 		invalidateAuthenticatedSession();
 		
 		session=context.getSession(true);
-		session.put("loginName", principal);
+		session.put(SessionScope.LOGIN_NAME, user.getLoginName());
+		session.put(SessionScope.USER_ID, user.getId());
+		session.put(SessionScope.FIRM_ID, user.getFirmId());
+		session.put(SessionScope.FIRM, user.getFirm());
 		if(session.getSource() instanceof HttpSession) {
 			Long timeout = 15L * 60L;
 			((HttpSession)session.getSource()).setMaxInactiveInterval(timeout.intValue());
@@ -78,6 +84,19 @@ public abstract class FSContext {
 		current().invalidateSession();
 	}
 	
+	public static Long getFirmId() {
+		return currentSession().getFirmId();
+	}
+	public static Long getUserId() {
+		return currentSession().getUserId();
+	}
+	public static String getLoginName() {
+		return currentSession().getLoginName();
+	}
+	
+	public static Firm getFirm() {
+		return currentSession().getFirm();
+	}
 	
 	private static class NullFSContext extends FSContext{
 		
@@ -87,13 +106,11 @@ public abstract class FSContext {
 
 		@Override
 		public SessionScope<?> getSession(boolean create) {
-			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
 		public void invalidateSession() {
-			// TODO Auto-generated method stub
 			
 		}
 	}
@@ -109,7 +126,6 @@ public abstract class FSContext {
 
 		@Override
 		public Map<String, String> getSource() {
-			// TODO Auto-generated method stub
 			return Collections.emptyMap();
 		}
 

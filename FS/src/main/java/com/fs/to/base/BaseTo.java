@@ -1,10 +1,10 @@
-package com.fs.dto.base;
+package com.fs.to.base;
 
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class BaseDto {
+public class BaseTo {
 
 	@JsonProperty("modifiedTimeStamp")
 	private Date modifiedTimeStamp;
@@ -21,6 +21,16 @@ public class BaseDto {
 	@JsonProperty("deleteStatus")
 	private Boolean deleteStatus;
 	
+	@JsonProperty("id")
+	private Long id;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public Boolean getDeleteStatus() {
 		return deleteStatus;

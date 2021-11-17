@@ -1,101 +1,72 @@
-package com.fs.pojo;
+package com.fs.to;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fs.to.base.BaseTo;
 
-import com.fs.pojo.base.impl.FirmAwareImpl;
-@Entity
-@Table(name="FSUSER", uniqueConstraints = @UniqueConstraint(columnNames = "id"))
-public class User extends FirmAwareImpl{
-	private static final long serialVersionUID = -1372725641329675387L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	@NotNull(message = "LoginName should not be null")
-	@Column(name = "LoginName")
+public class UserTo extends BaseTo{
+
+	@JsonProperty("loginName")
 	private String loginName;
 	
-	@NotNull(message = "Password should not be null")
-	@Column(name = "password")
+	@JsonProperty("password")
 	private String password;
-	
-	@NotNull(message = "ConfirmPassword should not be null")
-	@Column(name = "ConfirmPassword")
+
+	@JsonProperty("confirmPassword")
 	private String confirmPassword;
 	
-	@Column(name = "FirstName" , nullable = false, unique = false)
+	@JsonProperty("firstName")
 	private String firstName;
 	
-	@Column(name = "MiddleName" , nullable = true, unique = false)
+	@JsonProperty("middleName")
 	private String middleName;
 	
-	@Column(name = "LastName" , nullable = false, unique = false)
+	@JsonProperty("lastName")
 	private String lastName;
 	
-	@Column(name = "MobileNumber" , nullable = false, unique = false)
+	@JsonProperty("mobileNumber")
 	private String mobileNumber;
 	
-	@Column(name = "EmialId" , nullable = false, unique = false)
+	@JsonProperty("emialId")
 	private String emialId;
 	
-	@Column(name = "Aadhar" , nullable = false, unique = false)
+	@JsonProperty("aadhar")
 	private String aadhar;
 	
-	@Column(name = "State" , nullable = false, unique = false)
+	@JsonProperty("state")
 	private String state;
 	
-	@Column(name = "District",nullable = false, unique = false)
+	@JsonProperty("district")
 	private String district;
 	
-	@Column(name = "City" , nullable = false, unique = false)
+	@JsonProperty("city")
 	private String city;
 	
-	@Column(name = "Address" , nullable = false, unique = false)
+	@JsonProperty("address")
 	private String address;
 	
-	@Column(name = "DateOfBirth" , nullable = false, unique = false)
+	@JsonProperty("dateOfBirth")
 	private Date dateOfBirth;
 	
-	@Column(name = "DateOfJoining" , nullable = false, unique = false)
+	@JsonProperty("dateOfJoining")
 	private Date dateOfJoining;
 	
-	@Column(name = "CTC" , nullable = false, unique = false)
+	@JsonProperty("ctc")
 	private BigDecimal ctc;
 	
-	@Column(name = "BloodGroup" , nullable = false, unique = false)
+	@JsonProperty("bloodGroup")
 	private String bloodGroup;
 	
-	@Column(name = "UserProfileImg" , nullable = true, unique = false)
+	@JsonProperty("userProfileImg")
 	private byte[] userProfileImg;
 	
-	@Column(name = "UserCode" , nullable = false, unique = false)
+	@JsonProperty("userCode")
 	private String userCode;
 	
-	@ManyToOne(cascade=CascadeType.ALL) 
-	@JoinColumn(name = "DesignationId", referencedColumnName = "id")
-	private Designation designation;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	@JsonProperty("designation")
+	private DesignationTo designation;
 
 	public String getLoginName() {
 		return loginName;
@@ -234,20 +205,18 @@ public class User extends FirmAwareImpl{
 	}
 
 	public String getUserCode() {
-		userCode = "F"+getFirmId()+"E"+getId();
 		return userCode;
 	}
 
 	public void setUserCode(String userCode) {
-		userCode = "F"+getFirmId()+"E"+getId();
 		this.userCode = userCode;
 	}
 
-	public Designation getDesignation() {
+	public DesignationTo getDesignation() {
 		return designation;
 	}
 
-	public void setDesignation(Designation designation) {
+	public void setDesignation(DesignationTo designation) {
 		this.designation = designation;
 	}
 
@@ -258,5 +227,4 @@ public class User extends FirmAwareImpl{
 	public void setDistrict(String district) {
 		this.district = district;
 	}
-	
 }
