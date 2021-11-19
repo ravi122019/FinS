@@ -64,7 +64,7 @@ public class Firm extends TrackableImpl {
 	private String referredBy;
 
 	@Column(name = "IsActive", nullable = false, unique = false)
-	private Boolean isActive = false;
+	private Boolean isActive = true;
 
 	public Long getId() {
 		return id;
