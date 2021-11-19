@@ -2,114 +2,148 @@ import { RouteInfo } from "./vertical-sidebar.metadata";
 
 export const ROUTES: RouteInfo[] = [
   {
-    path: "",
-    title: "Personal",
-    icon: "mdi mdi-dots-horizontal",
-    class: "nav-small-cap",
+    path: '',
+    title: 'Personal',
+    icon: 'mdi mdi-dots-horizontal',
+    class: 'nav-small-cap',
     extralink: true,
-    label: "",
-    labelClass: "",
-    submenu: [],
+    submenu: []
   },
   {
-    path: "dashboard",
-    title: "Dashboards",
-    icon: "Home",
-    class: "has-arrow",
-    label: "3",
-    labelClass: "side-badge badge badge-info",
+    path: '/starter',
+    title: 'Starter Page',
+    icon: 'home',
+    class: '',
+    extralink: false,
+    submenu: []
+  },
+  {
+    path: '',
+    title: 'UI Components',
+    icon: 'mdi mdi-dots-horizontal',
+    class: 'nav-small-cap',
+    extralink: true,
+    submenu: []
+  },
+  {
+    path: 'component',
+    title: 'Component',
+    icon: 'cpu',
+    class: 'has-arrow',
     extralink: false,
     submenu: [
       {
-        path: "/dashboard/dashboard1",
-        title: "Modern",
-        icon: "mdi mdi-adjust",
-        class: "",
-        label: "",
-        labelClass: "",
+        path: '/component/accordion',
+        title: 'Accordion',
+        icon: 'mdi mdi-adjust',
+        class: '',
         extralink: false,
-        submenu: [],
+        submenu: []
       },
       {
-        path: "/dashboard/dashboard2",
-        title: "Classic",
-        icon: "mdi mdi-adjust",
-        class: "",
-        label: "",
-        labelClass: "",
+        path: '/component/alert',
+        title: 'Alert',
+        icon: 'mdi mdi-adjust',
+        class: '',
         extralink: false,
-        submenu: [],
+        submenu: []
       },
       {
-        path: "/dashboard/dashboard3",
-        title: "Analytical",
-        icon: "mdi mdi-adjust",
-        class: "",
-        label: "",
-        labelClass: "",
+        path: '/component/carousel',
+        title: 'Carousel',
+        icon: 'mdi mdi-adjust',
+        class: '',
         extralink: false,
-        submenu: [],
-      },
-    ],
-  },
-  {
-    path: "",
-    title: "Masters",
-    icon: "server",
-    class: "has-arrow",
-    label: "",
-    labelClass: "",
-    extralink: false,
-    submenu: [
-      {
-        path: "/dashboard/dashboard1",
-        title: "Customer Accounts",
-        icon: "mdi mdi-adjust",
-        class: "",
-        label: "",
-        labelClass: "",
-        extralink: false,
-        submenu: [],
+        submenu: []
       },
       {
-        path: "/dashboard/dashboard2",
-        title: "Employee Details",
-        icon: "mdi mdi-adjust",
-        class: "",
-        label: "",
-        labelClass: "",
+        path: '/component/dropdown',
+        title: 'Dropdown',
+        icon: 'mdi mdi-adjust',
+        class: '',
         extralink: false,
-        submenu: [],
+        submenu: []
       },
       {
-        path: "/dashboard/dashboard3",
-        title: "Loan Group",
-        icon: "mdi mdi-adjust",
-        class: "",
-        label: "",
-        labelClass: "",
+        path: '/component/modal',
+        title: 'Modal',
+        icon: 'mdi mdi-adjust',
+        class: '',
         extralink: false,
-        submenu: [],
-      },{
-        path: "/dashboard/dashboard3",
-        title: "Employee Designations",
-        icon: "mdi mdi-adjust",
-        class: "",
-        label: "",
-        labelClass: "",
-        extralink: false,
-        submenu: [],
+        submenu: []
       },
       {
-        path: "/dashboard/dashboard3",
-        title: "Location Details",
-        icon: "mdi mdi-adjust",
-        class: "",
-        label: "",
-        labelClass: "",
+        path: '/component/pagination',
+        title: 'Pagination',
+        icon: 'mdi mdi-adjust',
+        class: '',
         extralink: false,
-        submenu: [],
+        submenu: []
       },
-    ],
+      {
+        path: '/component/poptool',
+        title: 'Popover & Tooltip',
+        icon: 'mdi mdi-adjust',
+        class: '',
+        extralink: false,
+        submenu: []
+      },
+      {
+        path: '/component/progressbar',
+        title: 'Progressbar',
+        icon: 'mdi mdi-adjust',
+        class: '',
+        extralink: false,
+        submenu: []
+      },
+      {
+        path: '/component/rating',
+        title: 'Ratings',
+        icon: 'mdi mdi-adjust',
+        class: '',
+        extralink: false,
+        submenu: []
+      },
+      {
+        path: '/component/tabs',
+        title: 'Tabs',
+        icon: 'mdi mdi-adjust',
+        class: '',
+        extralink: false,
+        submenu: []
+      },
+      {
+        path: '/component/timepicker',
+        title: 'Timepicker',
+        icon: 'mdi mdi-adjust',
+        class: '',
+        extralink: false,
+        submenu: []
+      },
+      {
+        path: '/component/buttons',
+        title: 'Button',
+        icon: 'mdi mdi-adjust',
+        class: '',
+        extralink: false,
+        submenu: []
+      },
+      {
+        path: '/component/card',
+        title: 'Card',
+        icon: 'mdi mdi-adjust',
+        class: '',
+        extralink: false,
+        submenu: []
+      },
+      {
+        path: '/component/notifier',
+        title: 'Notifier',
+        icon: 'mdi mdi-adjust',
+        class: '',
+        extralink: false,
+        submenu: []
+      }
+    ]
   }
 ];
