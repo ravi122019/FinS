@@ -2,6 +2,7 @@ package com.fs.to;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fs.to.base.BaseTo;
@@ -67,6 +68,9 @@ public class UserTo extends BaseTo{
 	
 	@JsonProperty("designation")
 	private DesignationTo designation;
+	
+	@JsonProperty("roles")
+	private List<RoleTo> roles;
 
 	public String getLoginName() {
 		return loginName;
@@ -226,5 +230,13 @@ public class UserTo extends BaseTo{
 
 	public void setDistrict(String district) {
 		this.district = district;
+	}
+
+	public List<RoleTo> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<RoleTo> roles) {
+		this.roles = roles;
 	}
 }

@@ -2,6 +2,7 @@ package com.fs.pojo;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -88,6 +91,12 @@ public class User extends FirmAwareImpl{
 	@ManyToOne(cascade=CascadeType.ALL) 
 	@JoinColumn(name = "DesignationId", referencedColumnName = "id")
 	private Designation designation;
+	
+	@ManyToMany
+	@JoinTable(name = "users_roles", 
+	joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), 
+	inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles;
 
 	public Long getId() {
 		return id;
@@ -234,7 +243,7 @@ public class User extends FirmAwareImpl{
 	}
 
 	public String getUserCode() {
-		userCode = "F"+getFirmId()+"E"+getId();
+		//userCode = "F"+getFirmId()+"E"+getId();
 		return userCode;
 	}
 
@@ -258,5 +267,12 @@ public class User extends FirmAwareImpl{
 	public void setDistrict(String district) {
 		this.district = district;
 	}
-	
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
 }
