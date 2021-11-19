@@ -1,0 +1,11 @@
+
+{
+    "/fs": {
+        "target": "http://localhost:8080/fs/",
+        "secure": false,
+        "pathRewrite": {
+            "^/fs": ""
+        },
+        "changeOrigin": true
+    }
+}
