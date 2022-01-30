@@ -1,10 +1,12 @@
 package com.fs.to;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MenusTo {
 	
-	@JsonProperty("id")
+	@JsonProperty("menuId")
+	@JsonAlias("id")
 	private Long id;
 	
 	@JsonProperty("name")

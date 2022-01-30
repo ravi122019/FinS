@@ -2,6 +2,7 @@ package com.fs.to;
 
 import org.springframework.validation.annotation.Validated;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fs.to.base.BaseTo;
 @Validated
@@ -15,6 +16,18 @@ public class LocationTo extends BaseTo{
 	
 	@JsonProperty("name")
 	private String name;
+	
+	@JsonProperty("locationId")
+	@JsonAlias("id")
+	private Long id;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getState() {
 		return state;

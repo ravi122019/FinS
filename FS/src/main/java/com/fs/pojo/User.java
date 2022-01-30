@@ -2,11 +2,12 @@ package com.fs.pojo;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -92,11 +93,14 @@ public class User extends FirmAwareImpl{
 	@JoinColumn(name = "DesignationId", referencedColumnName = "id")
 	private Designation designation;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "users_roles", 
 	joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), 
 	inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private List<Role> roles;
+    private Set<Role> roles;
+	
+	@Column(name = "LastLogin" , nullable = true, unique = false)
+	private Date lastLogin;
 
 	public Long getId() {
 		return id;
@@ -268,11 +272,19 @@ public class User extends FirmAwareImpl{
 		this.district = district;
 	}
 
-	public List<Role> getRoles() {
+	public Set<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<Role> roles) {
+	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public Date getLastLogin() {
+		return lastLogin;
+	}
+
+	public void setLastLogin(Date lastLogin) {
+		this.lastLogin = lastLogin;
 	}
 }

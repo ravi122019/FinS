@@ -6,6 +6,7 @@ import com.fs.services.base.Service;
 public interface UserService extends Service<User>{
 
 	User getUserByLoginName(String loginName);
+	User getUserByLoginNameAndPassword(String loginName, String passwrod);
 	
 
 }

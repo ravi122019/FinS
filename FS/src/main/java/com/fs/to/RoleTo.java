@@ -2,11 +2,13 @@ package com.fs.to;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RoleTo {
 	
-	@JsonProperty("id")
+	@JsonProperty("roleId")
+	@JsonAlias("id")
 	private Long id;
 	
 	@JsonProperty("name")

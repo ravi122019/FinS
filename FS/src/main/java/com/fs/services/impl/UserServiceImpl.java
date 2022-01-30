@@ -22,7 +22,14 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService{
 	
 	@Override
 	public User getUserByLoginName(String loginName) {
-		return userRepo.findByLoginName(loginName).get();
+		return userRepo.findByLoginName(loginName).orElse(null);
 	}
+
+	@Override
+	public User getUserByLoginNameAndPassword(String loginName, String password) {
+		return userRepo.findByLoginNameAndPassword(loginName, password).orElse(null);
+	}
+	
+	
 
 }

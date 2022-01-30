@@ -2,12 +2,14 @@ package com.fs.to;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fs.to.base.BaseTo;
 
 public class FirmTo extends BaseTo {
 
-	@JsonProperty("id")
+	@JsonProperty("firmId")
+	@JsonAlias("id")
 	private Long id;
 
 	@JsonProperty("name")

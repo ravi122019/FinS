@@ -4,9 +4,11 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fs.to.base.BaseTo;
-
+@JsonIgnoreProperties(value = {"confirmPassword"})
 public class UserTo extends BaseTo{
 
 	@JsonProperty("loginName")
@@ -71,6 +73,21 @@ public class UserTo extends BaseTo{
 	
 	@JsonProperty("roles")
 	private List<RoleTo> roles;
+	
+	@JsonProperty("userId")
+	@JsonAlias("id")
+	private Long id;
+	
+	@JsonProperty("lastLogin")
+	private Date lastLogin;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getLoginName() {
 		return loginName;
@@ -238,5 +255,13 @@ public class UserTo extends BaseTo{
 
 	public void setRoles(List<RoleTo> roles) {
 		this.roles = roles;
+	}
+
+	public Date getLastLogin() {
+		return lastLogin;
+	}
+
+	public void setLastLogin(Date lastLogin) {
+		this.lastLogin = lastLogin;
 	}
 }

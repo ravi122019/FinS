@@ -36,7 +36,8 @@ public abstract class BaseController<B, D> {
 	@Autowired
 	private DataBinderUtil binder;
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public <T> ResponseEntity<List> getAll(@RequestParam Map<String, String> map) {
 		List<Object> list = new ArrayList<Object>();

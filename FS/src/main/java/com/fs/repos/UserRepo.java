@@ -10,5 +10,6 @@ import com.fs.repos.base.BaseRepo;
 public interface UserRepo extends BaseRepo<User, Long>{
 
 	Optional<User> findByLoginName(String loginName);
+	Optional<User> findByLoginNameAndPassword(String loginName, String password);
 
 }

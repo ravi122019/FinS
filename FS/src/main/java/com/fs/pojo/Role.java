@@ -1,9 +1,11 @@
 package com.fs.pojo;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,8 +17,13 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "FSROLE", uniqueConstraints = @UniqueConstraint(columnNames = { "name", "id"}))
-public class Role {
+public class Role implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6817801229782697802L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -24,7 +31,7 @@ public class Role {
 	@Column(name = "Name")
 	private String name;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "roles_menus", 
 	joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"), 
 	inverseJoinColumns = @JoinColumn(name = "menus_id", referencedColumnName = "id"))

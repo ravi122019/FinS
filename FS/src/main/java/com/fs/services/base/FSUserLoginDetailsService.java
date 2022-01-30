@@ -17,11 +17,14 @@ public class FSUserLoginDetailsService implements UserDetailsService {
 	
 	
 	@Override
-	public UserDetails loadUserByUsername(String loginName) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String loginName) {
 		Optional<User> loginUser = userRepo.findByLoginName(loginName);
-		loginUser.orElseThrow(()-> new UsernameNotFoundException("User Not found with given login name "+ loginName));
-		return loginUser.map(FSUserLoginDetails::new).orElse(null);
-		
-		
+		if (!loginUser.isPresent()) {
+			throw new UsernameNotFoundException("User Not found with given login name " + loginName);
+		}
+//		 return new org.springframework.security.core.userdetails.User(
+//		          user.getEmail(), user.getPassword(), user.isEnabled(), true, true, 
+//		          true, getAuthorities(user.getRoles()));
+		return new FSUserLoginDetails(loginUser.get());
 	}
 }

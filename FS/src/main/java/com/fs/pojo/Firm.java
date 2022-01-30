@@ -11,7 +11,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.fs.pojo.base.impl.TrackableImpl;
-
 @Entity
 @Table(name = "FSFIRM", uniqueConstraints = @UniqueConstraint(columnNames = "id"))
 public class Firm extends TrackableImpl {

@@ -1,5 +1,7 @@
 package com.fs.pojo;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +12,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "FSMENUS", uniqueConstraints = @UniqueConstraint(columnNames = { "name", "id"}))
-public class Menus {
+public class Menus implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

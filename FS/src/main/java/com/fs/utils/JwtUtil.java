@@ -5,6 +5,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +29,13 @@ public class JwtUtil {
         return claimsResolver.apply(claims);
     }
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+    	Claims claims = null;
+    	try {
+    		claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+		} catch (Exception e) {
+			System.out.println("Token Expired + ExpiredJwtException");
+		}
+    	return claims;
     }
 
     private Boolean isTokenExpired(String token) {
@@ -43,7 +50,7 @@ public class JwtUtil {
     private String createToken(Map<String, Object> claims, String subject) {
 
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))
+                .setExpiration(Date.from(ZonedDateTime.now().plusMinutes(20).toInstant()))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
 

@@ -5,9 +5,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,25 +13,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fs.context.FSContext;
-import com.fs.controller.base.BaseController;
 import com.fs.pojo.User;
 import com.fs.services.UserService;
 import com.fs.services.base.FSUserLoginDetailsService;
-import com.fs.services.base.Service;
 import com.fs.to.AuthonticatedUserTo;
 import com.fs.to.UserTo;
 import com.fs.utils.DataBinderUtil;
 import com.fs.utils.JwtUtil;
 
 @RestController
-@RequestMapping("/user")
-public class UserController extends  BaseController<UserTo, User>{
+@RequestMapping("/login")
+public class LoginController {
 	
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private AuthenticationManager authenticationManager;
 	
 	@Autowired
 	private FSUserLoginDetailsService loginDetailService;
@@ -44,38 +37,17 @@ public class UserController extends  BaseController<UserTo, User>{
 	@Autowired
 	private DataBinderUtil binder;
 
-	/*
-	 * @Override protected Example<User> getExample(Map<String, String> map) { User
-	 * user =new User(); user.setFirmId(1l); Example<User> domain =
-	 * Example.of(user); return domain; }
-	 */
-
-	@Override
-	protected Service<User> getService() {
-		return userService;
-	}
-
-	@SuppressWarnings("rawtypes")
-	@Override
-	protected Class getBusinessObject() {
-		return UserTo.class;
-	}
-
-	@SuppressWarnings("rawtypes")
-	@Override
-	protected Class getDomainObject() {
-		return User.class;
-	}
 	
 	@PostMapping
 	@RequestMapping(value = "/authenticate")
 	public ResponseEntity<Object> createAuthToken(@RequestBody UserTo userInfo) throws Exception {
 		User user = null;
 		try {
-			authenticationManager
-					.authenticate(new UsernamePasswordAuthenticationToken(userInfo.getLoginName(), userInfo.getPassword()));
-			user = userService.getUserByLoginName(userInfo.getLoginName());
+			user = userService.getUserByLoginNameAndPassword(userInfo.getLoginName(), userInfo.getPassword());
 		} catch (BadCredentialsException e) {
+			return new ResponseEntity<Object>(new String("UnAuthorized User."), HttpStatus.UNAUTHORIZED);
+		}
+		if(user==null) {
 			return new ResponseEntity<Object>(new String("UnAuthorized User."), HttpStatus.UNAUTHORIZED);
 		}
 		final UserDetails userDetails = loginDetailService.loadUserByUsername(userInfo.getLoginName());
