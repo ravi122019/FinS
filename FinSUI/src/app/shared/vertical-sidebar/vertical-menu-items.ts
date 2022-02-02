@@ -1,29 +1,21 @@
 import { RouteInfo } from "./vertical-sidebar.metadata";
 
 export const ROUTES: RouteInfo[] = [
+  
   {
-    path: '',
-    title: 'Personal',
-    icon: 'mdi mdi-dots-horizontal',
-    class: 'nav-small-cap',
-    extralink: true,
-    submenu: []
-  },
-  {
-    path: '/starter',
-    title: 'Starter Page',
-    icon: 'home',
-    class: '',
+    path: 'modules',
+    title: 'Modules',
+    icon: 'cpu',
+    class: 'has-arrow',
     extralink: false,
-    submenu: []
-  },
-  {
-    path: '',
-    title: 'UI Components',
-    icon: 'mdi mdi-dots-horizontal',
-    class: 'nav-small-cap',
-    extralink: true,
-    submenu: []
+    submenu: [{
+      path: '/modules/firm/firm-list',
+      title: 'Firm',
+      icon: 'mdi mdi-adjust',
+      class: '',
+      extralink: false,
+      submenu: []
+    },]
   },
   {
     path: 'component',
