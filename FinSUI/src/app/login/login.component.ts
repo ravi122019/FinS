@@ -15,6 +15,7 @@ export class LoginComponent {
   readonly msgConst = MESSAGES;
   isLoginError: boolean;
   subscription: Subscription;
+  isLoading = false;
   constructor(private service: MyserviceService, private routes: Router, private authService: AuthService,
     private loginService: LoginService)
    { }
@@ -31,11 +32,14 @@ export class LoginComponent {
     if (!uname || !password) {
       return;
     }
+    this.isLoading = true;
     this.isLoginError = false;
     this.subscription = this.loginService.login(uname, password).subscribe((res: any) => {
       this.authService.setAuthToken(res.aceess_key);
       this.routes.navigate(['/starter']);
+      this.isLoading = false;
     }, (error: any) => {
+      this.isLoading = false;
       this.isLoginError = true;
     })
   }

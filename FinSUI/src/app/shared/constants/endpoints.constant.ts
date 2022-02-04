@@ -3,6 +3,9 @@ import { environment } from "src/environments/environment"
 export const API_ENDPOINT = {
     login: {
         URI: 'login/authenticate'
+    },
+    firm: {
+        getFirm: 'firm'
     }
 }
 
@@ -11,5 +14,8 @@ export const API_ENDPOINT = {
 export class GetApiEndPoints {
     public static login = {
         getUrl: () => `${environment.baseURI}${API_ENDPOINT.login.URI}`
+    }
+    public static getFirm = {
+        getUrl: () => `${environment.baseURI}${API_ENDPOINT.firm.getFirm}`
     }
 }

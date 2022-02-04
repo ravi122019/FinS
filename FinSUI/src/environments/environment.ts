@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseURI: "fs/"
+  baseURI: "http://3.138.195.191:8080/fs/"
 };
 
 /*
