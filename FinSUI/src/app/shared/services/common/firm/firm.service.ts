@@ -24,4 +24,9 @@ export class FirmService {
     const endPoint = `${GetApiEndPoints.getFirm.getUrl()}/${payload.firmId}`;
     return this.httpService.put(endPoint, payload);
   }
+
+  public deleteFirms(firmId: number): Observable<any> {
+    const endPoint = `${GetApiEndPoints.getFirm.getUrl()}/${firmId}`;
+    return this.httpService.delete(endPoint);
+  }
 }

@@ -1,29 +1,32 @@
 <div class="row">
+    <notifier-container></notifier-container>
     <div class="col-md-12">
         <!--- Complete Table -->
         <div class="card">
             <div class="card-body">
                 <div class="d-md-flex mt-3">
-                    <input type="text" placeholder="Search" class="form-control w-auto" />
+                    <input type="text" placeholder="Search" class="form-control w-auto" [(ngModel)]="csearchTerm" />
                     <button type="button" class="btn btn-primary ml-auto" (click)="openFirmModal(editModal, null)">+ Add
-                        Client</button>
+                        Firm</button>
                 </div>
                 <div class="table-responsive" *ngIf="!isLoading">
                     <table class="table table-striped no-wrap border mt-4">
                         <thead>
                             <tr>
                                 <th *ngFor="let item of FIRM_COLUMN">{{item.name}}</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr
-                                *ngFor="let firm of firmData">
-                            <td *ngFor="let item of FIRM_COLUMN">
-                                <ngb-highlight [result]="firm[item.id]" [term]="csearchTerm"></ngb-highlight>
-                            <td>
-                               <i class="ti-pencil text-info m-r-10 pointer" (click)="openFirmModal(editModal, firm)"></i>
-                                <i class="ti-trash text-danger pointer"></i> 
-                            </td>
+                            <tr *ngFor="let firm of firmData">
+                                <td *ngFor="let item of FIRM_COLUMN">
+                                    <ngb-highlight [result]="firm[item.id]" [term]="csearchTerm"></ngb-highlight>
+                                </td>
+                                <td>
+                                    <i class="ti-pencil text-info m-r-10 pointer"
+                                        (click)="openFirmModal(editModal, firm)"></i>
+                                    <i class="ti-trash text-danger pointer" (click)="showDeleteFirm(deleteFirmModal, firm.firmId);"></i>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -38,11 +41,7 @@
                         </select>
                     </div> -->
                 </div>
-                <div *ngIf="isLoading" class="d-flex justify-content-center">
-                    <div class="spinner-border" role="status">
-                      <span class="sr-only">Loading...</span>
-                    </div>
-                  </div>
+                <app-loader *ngIf="isLoading"></app-loader>
             </div>
         </div>
     </div>
@@ -51,7 +50,7 @@
 <ng-template #editModal let-modal>
 
     <div class="modal-header">
-        <h5 class="modal-title" id="editLabel">{{editAddLabel}} Client</h5>
+        <h5 class="modal-title" id="editLabel">{{editAddLabel}} Firm</h5>
         <button type="button" class="close" (click)="closeBtnClick()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -93,7 +92,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="form-group row">
                 <label for="city" class="col-sm-4 col-form-label">City</label>
                 <div class="col-sm-8">
@@ -111,13 +110,33 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-dark" (click)="closeBtnClick()">Close</button>
 
-                <button *ngIf="!isLoading" type="submit" class="btn btn-primary" [disabled]="editClient.invalid">Save</button>
+                <button *ngIf="!isLoading" type="submit" class="btn btn-primary"
+                    [disabled]="editClient.invalid">Save</button>
                 <div *ngIf="isLoading" class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
                     <span class="sr-only">Loading...</span>
-                  </div>
+                </div>
             </div>
         </form>
     </div>
 </ng-template>
+<!--- Modal for complete Table -->
 
+<!--- Modal for complete Table -->
+<ng-template #deleteFirmModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="editLabel">Delete Firm</h5>
+        <button type="button" class="close" (click)="closeBtnClick()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <ngb-alert *ngIf="isServiceError" [type]="'danger'" (close)="closeAlert(alert)">Service Error, Please Contact System Administrator!</ngb-alert>
+        <p>Are you sure you want to delete firm?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-dark" (click)="closeBtnClick()">Cancel</button>
+        <button type="submit" class="btn btn-primary" (click)="confirDeleteFirm()">Delete</button>
+    </div>
+</ng-template>
 <!--- Modal for complete Table -->
