@@ -18,7 +18,9 @@ export class LoginComponent {
   isLoading = false;
   constructor(private service: MyserviceService, private routes: Router, private authService: AuthService,
     private loginService: LoginService)
-   { }
+   { 
+    sessionStorage.removeItem('authToken');
+   }
 
   loginform = true;
   recoverform = false;
