@@ -2,6 +2,7 @@ import { Component, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbPanelChangeEvent, NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { TranslateService } from '@ngx-translate/core';
+import { MyserviceService } from 'src/app/myservice.service';
 
 declare var $: any;
 
@@ -112,7 +113,7 @@ export class HorizontalNavigationComponent implements AfterViewInit {
     icon: 'de'
   }]
 
-  constructor(private modalService: NgbModal, private translate: TranslateService) {
+  constructor(private modalService: NgbModal, private translate: TranslateService, private myserviceService: MyserviceService) {
 
     translate.setDefaultLang('en');
 
@@ -123,5 +124,9 @@ export class HorizontalNavigationComponent implements AfterViewInit {
   changeLanguage(lang: any) {
     this.translate.use(lang.code)
     this.selectedLanguage = lang;
+  }
+
+  logOut(): void {
+    this.myserviceService.logout();
   }
 }

@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotifierOptions, NotifierService } from 'angular-notifier';
 import { Subscription } from 'rxjs';
 import { FIRM_COLUMN } from 'src/app/shared/constants/firm/firm.constant';
+import { MESSAGES } from 'src/app/shared/constants/messages.constant';
 import { FirmService } from 'src/app/shared/services/common/firm/firm.service';
 
 @Component({
@@ -14,6 +15,7 @@ import { FirmService } from 'src/app/shared/services/common/firm/firm.service';
 export class FirmListComponent implements OnInit, OnDestroy {
   firmData = [];
   readonly FIRM_COLUMN = FIRM_COLUMN;
+  readonly MESSAGES = MESSAGES;
   private subscription: Subscription;
   editAddLabel: string = 'Edit';
   editClient: FormGroup;
@@ -38,7 +40,11 @@ export class FirmListComponent implements OnInit, OnDestroy {
       city: ['', Validators.required],
       address: ['', Validators.required]
     });
+    this.getFirms();
+  }
 
+  getFirms(): void {
+    this.isLoading = true;
     this.subscription = this.firmService.getFirms().subscribe(firmData => {
       this.firmData = firmData;
       this.isLoading = false;
@@ -62,7 +68,8 @@ export class FirmListComponent implements OnInit, OnDestroy {
     this.subscription = this.firmService.deleteFirms(this.firmId).subscribe(response => {
       this.isLoading = false;
       this.closeBtnClick();
-      this.notifier.notify( 'success', 'Firm Deleted Successfully!!' );
+      this.getFirms();
+      this.notifier.notify( 'success', MESSAGES.firm.delete );
     }, (error: any) => {
       console.log(error);
       this.isLoading = false;
@@ -108,7 +115,8 @@ export class FirmListComponent implements OnInit, OnDestroy {
       this.subscription = this.firmService.edirFirms(this.editedFirm).subscribe(response => {
         this.isLoading = false;
         this.closeBtnClick();
-        this.notifier.notify( 'success', 'Firm Data Updated Successfully!!' );
+        this.getFirms();
+        this.notifier.notify( 'success', MESSAGES.firm.update );
       }, (error: any) => {
         console.log(error);
         this.isLoading = false;
@@ -118,7 +126,8 @@ export class FirmListComponent implements OnInit, OnDestroy {
       this.subscription = this.firmService.postFirms(payload).subscribe(response => {
         this.isLoading = false;
         this.closeBtnClick();
-        this.notifier.notify( 'success', 'Firm Created Successfully!!' );
+        this.getFirms();
+        this.notifier.notify( 'success', MESSAGES.firm.add );
       }, (error: any) => {
         console.log(error);
         this.isLoading = false;
@@ -148,6 +157,10 @@ export class FirmListComponent implements OnInit, OnDestroy {
   cfilter(v: string) {
     return this.firmData.filter(x => x.Name?.toLowerCase().indexOf(v.toLowerCase()) !== -1 ||
       x.UserName?.toLowerCase().indexOf(v.toLowerCase()) !== -1 || x.Email?.toLowerCase().indexOf(v.toLowerCase()) !== -1);
+  }
+
+  closeAlert(alert): void {
+    console.log('alert...', alert);
   }
 
 }

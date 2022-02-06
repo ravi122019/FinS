@@ -17,7 +17,7 @@ export class HttpInterceptors implements HttpInterceptor {
   constructor(private authService: AuthService, private routes: Router) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = this.authService.getAuthToken();
+    const token = sessionStorage.getItem('authToken');
 
     if (token) {
       // If we have a token, we set it to the header
@@ -29,8 +29,9 @@ export class HttpInterceptors implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((err) => {
         if (err instanceof HttpErrorResponse) {
-          if (err.status === 401) {
+          if (err.status === 401 || err.status === 403) {
             // redirect user to the logout page
+            sessionStorage.removeItem('authToken');
             this.routes.navigate(['/login']);
           }
         }

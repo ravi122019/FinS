@@ -7,6 +7,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { TranslateService } from '@ngx-translate/core';
+import { MyserviceService } from 'src/app/myservice.service';
 declare var $: any;
 
 @Component({
@@ -115,13 +116,17 @@ export class VerticalNavigationComponent implements AfterViewInit {
 
 
 
-  constructor(private modalService: NgbModal, private translate: TranslateService) {
+  constructor(private modalService: NgbModal, private translate: TranslateService, private myserviceService: MyserviceService) {
     translate.setDefaultLang('en');
   }
 
   changeLanguage(lang: any) {
     this.translate.use(lang.code)
     this.selectedLanguage = lang;
+  }
+
+  logOut(): void {
+    this.myserviceService.logout();
   }
 
   ngAfterViewInit() { }

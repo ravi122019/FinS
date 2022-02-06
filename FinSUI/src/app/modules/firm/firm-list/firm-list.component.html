@@ -57,6 +57,7 @@
     </div>
 
     <div class="modal-body">
+         <ngb-alert *ngIf="isServiceError" [type]="'danger'" (closed)="isServiceError=false">{{MESSAGES.serviceError}}</ngb-alert>
         <form [formGroup]="editClient" (ngSubmit)="saveFirms()">
 
 
@@ -131,7 +132,7 @@
     </div>
 
     <div class="modal-body">
-        <ngb-alert *ngIf="isServiceError" [type]="'danger'" (close)="closeAlert(alert)">Service Error, Please Contact System Administrator!</ngb-alert>
+        <ngb-alert *ngIf="isServiceError" [type]="'danger'" (closed)="isServiceError=false">{{MESSAGES.serviceError}}</ngb-alert>
         <p>Are you sure you want to delete firm?</p>
     </div>
     <div class="modal-footer">

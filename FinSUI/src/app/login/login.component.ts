@@ -36,6 +36,7 @@ export class LoginComponent {
     this.isLoginError = false;
     this.subscription = this.loginService.login(uname, password).subscribe((res: any) => {
       this.authService.setAuthToken(res.aceess_key);
+      sessionStorage.setItem('authToken', res.aceess_key);
       this.routes.navigate(['/starter']);
       this.isLoading = false;
     }, (error: any) => {
