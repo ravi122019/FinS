@@ -22,7 +22,16 @@ export class HttpInterceptors implements HttpInterceptor {
     if (token) {
       // If we have a token, we set it to the header
       request = request.clone({
-        setHeaders: { Authorization: `Bearer ${token}` }
+        setHeaders: { Authorization: `Bearer ${token}`,
+                      'Content-Type': 'application/json',
+                      'Access-Control-Allow-Origin': 'http://localhost:4200' },
+        withCredentials: true
+      });
+    } else{
+      request = request.clone({
+        setHeaders: { 'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'http://localhost:4200' },
+        withCredentials: true
       });
     }
 
