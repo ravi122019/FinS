@@ -30,7 +30,7 @@ public class User extends FirmAwareImpl{
 	private Long id;
 	
 	@NotNull(message = "LoginName should not be null")
-	@Column(name = "LoginName")
+	@Column(name = "LoginName", nullable = false, unique = true)
 	private String loginName;
 	
 	@NotNull(message = "Password should not be null")
@@ -56,7 +56,7 @@ public class User extends FirmAwareImpl{
 	@Column(name = "EmialId" , nullable = false, unique = false)
 	private String emialId;
 	
-	@Column(name = "Aadhar" , nullable = false, unique = false)
+	@Column(name = "Aadhar" , nullable = true, unique = false)
 	private String aadhar;
 	
 	@Column(name = "State" , nullable = false, unique = false)
@@ -71,22 +71,22 @@ public class User extends FirmAwareImpl{
 	@Column(name = "Address" , nullable = false, unique = false)
 	private String address;
 	
-	@Column(name = "DateOfBirth" , nullable = false, unique = false)
+	@Column(name = "DateOfBirth" , nullable = true, unique = false)
 	private Date dateOfBirth;
 	
-	@Column(name = "DateOfJoining" , nullable = false, unique = false)
+	@Column(name = "DateOfJoining" , nullable = true, unique = false)
 	private Date dateOfJoining;
 	
-	@Column(name = "CTC" , nullable = false, unique = false)
+	@Column(name = "CTC" , nullable = true, unique = false)
 	private BigDecimal ctc;
 	
-	@Column(name = "BloodGroup" , nullable = false, unique = false)
+	@Column(name = "BloodGroup" , nullable = true, unique = false)
 	private String bloodGroup;
 	
 	@Column(name = "UserProfileImg" , nullable = true, unique = false)
 	private byte[] userProfileImg;
 	
-	@Column(name = "UserCode" , nullable = false, unique = false)
+	@Column(name = "UserCode" , nullable = true, unique = false)
 	private String userCode;
 	
 	@ManyToOne(cascade=CascadeType.ALL) 

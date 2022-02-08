@@ -50,10 +50,10 @@ public class Firm extends TrackableImpl {
 	@Column(name = "Pancard", nullable = true, unique = false)
 	private String pancard;
 
-	@Column(name = "RegistrationDate", nullable = false, unique = false)
+	@Column(name = "RegistrationDate", nullable = true, unique = false)
 	private Date registrationDate;
 
-	@Column(name = "ReNewDueDate", nullable = false, unique = false)
+	@Column(name = "ReNewDueDate", nullable = true, unique = false)
 	private Date reNewDueDate;
 
 	@Column(name = "MyReferralCode", nullable = true, unique = false)
@@ -62,7 +62,7 @@ public class Firm extends TrackableImpl {
 	@Column(name = "ReferredBy", nullable = true, unique = false)
 	private String referredBy;
 
-	@Column(name = "IsActive", nullable = false, unique = false)
+	@Column(name = "IsActive", nullable = true, unique = false)
 	private Boolean isActive = true;
 
 	public Long getId() {

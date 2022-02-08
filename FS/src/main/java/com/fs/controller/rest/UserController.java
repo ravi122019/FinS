@@ -66,28 +66,6 @@ public class UserController extends  BaseController<UserTo, User>{
 	protected Class getDomainObject() {
 		return User.class;
 	}
-	
-	@PostMapping
-	@RequestMapping(value = "/authenticate")
-	public ResponseEntity<Object> createAuthToken(@RequestBody UserTo userInfo) throws Exception {
-		User user = null;
-		try {
-			authenticationManager
-					.authenticate(new UsernamePasswordAuthenticationToken(userInfo.getLoginName(), userInfo.getPassword()));
-			user = userService.getUserByLoginName(userInfo.getLoginName());
-		} catch (BadCredentialsException e) {
-			return new ResponseEntity<Object>(new String("UnAuthorized User."), HttpStatus.UNAUTHORIZED);
-		}
-		final UserDetails userDetails = loginDetailService.loadUserByUsername(userInfo.getLoginName());
-		user.setLastLogin(new Date());
-		userService.save(user);
-		AuthonticatedUserTo userTo = (AuthonticatedUserTo) binder.toBusiness(user, AuthonticatedUserTo.class);
-		String key=jwtUtil.generateToken(userDetails);
-		FSContext.createAuthenticatedSession(user);
-		return new ResponseEntity<Object>(new LoginWithKey(key,userTo), HttpStatus.OK);
-	}
-
-
 	class LoginWithKey {
 		private String aceess_key;
 		private AuthonticatedUserTo userTo;

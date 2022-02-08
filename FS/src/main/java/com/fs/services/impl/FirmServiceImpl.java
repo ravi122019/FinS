@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fs.constants.RoleConstants;
 import com.fs.pojo.Firm;
@@ -36,12 +37,15 @@ public class FirmServiceImpl extends ServiceImpl<Firm> implements FirmService{
 	}
 	
 	@Override
+	@Transactional
 	public Firm save(Firm firm) {
 
 		User exampleUser = new User();
 		exampleUser.setFirm(firm);
 		List<User> firmUsers = userService.findAll(Example.of(exampleUser));
-		if (firmUsers != null && !firmUsers.isEmpty()) {
+		firm.setIsActive(true);
+		firmRepo.save(firm);
+		if (firmUsers != null && firmUsers.isEmpty()) {
 			User user = new User();
 			user.setLoginName(firm.getMobileNumber());
 			user.setPassword(firm.getMobileNumber().toString());
@@ -54,10 +58,11 @@ public class FirmServiceImpl extends ServiceImpl<Firm> implements FirmService{
 			user.setCity(firm.getCity());
 			user.setAddress(firm.getAddress());
 			user.setEmialId(firm.getEmailId());
-			user.setMobileNumber(user.getMobileNumber());
+			user.setDistrict(firm.getDistrict());
+			user.setMobileNumber(firm.getMobileNumber());
+			user.setFirm(firm);
 			userService.save(user);
 		}
-		firmRepo.save(firm);
 		return firm;
 	}
 	
