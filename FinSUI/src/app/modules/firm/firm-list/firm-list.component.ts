@@ -42,7 +42,7 @@ export class FirmListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.editClient = this.formBuilder.group({
       name: ['', Validators.required],
-      mobileNumber: ['', Validators.required],
+      mobileNumber: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       emailId: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required]
     });
