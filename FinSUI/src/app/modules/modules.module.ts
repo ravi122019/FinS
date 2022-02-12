@@ -8,6 +8,7 @@ import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { ModulesRoutes } from './modules.routing';
 import { FirmListComponent } from './firm/firm-list/firm-list.component';
 import { LoaderComponent } from '../shared/custom-components/loader/loader.component';
+import { TypeheadComponent } from '../shared/custom-components/typehead/typehead.component';
 
 /**
  * Custom angular notifier options
@@ -63,7 +64,8 @@ import { LoaderComponent } from '../shared/custom-components/loader/loader.compo
   ],
   declarations: [
     FirmListComponent,
-    LoaderComponent
+    LoaderComponent,
+    TypeheadComponent
   ]
 })
 export class ModulesModule { }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { RouterModule, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MESSAGES } from '../shared/constants/messages.constant';
@@ -17,9 +18,10 @@ export class LoginComponent {
   subscription: Subscription;
   isLoading = false;
   constructor(private service: MyserviceService, private routes: Router, private authService: AuthService,
-    private loginService: LoginService)
+    private loginService: LoginService, private titleService: Title)
    { 
     sessionStorage.removeItem('authToken');
+    this.titleService.setTitle('FinS');
    }
 
   loginform = true;

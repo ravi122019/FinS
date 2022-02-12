@@ -1,12 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { NotifierOptions, NotifierService } from 'angular-notifier';
-import { Subscription } from 'rxjs';
+import { merge, Observable, OperatorFunction, Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { FIRM_COLUMN } from 'src/app/shared/constants/firm/firm.constant';
 import { MESSAGES } from 'src/app/shared/constants/messages.constant';
 import { FirmService } from 'src/app/shared/services/common/firm/firm.service';
-
+const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado',
+  'Connecticut', 'Delaware', 'District Of Columbia', 'Federated States Of Micronesia', 'Florida', 'Georgia',
+  'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine',
+  'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana',
+  'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+  'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island',
+  'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Islands', 'Virginia',
+  'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 @Component({
   selector: 'app-firm-list',
   templateUrl: './firm-list.component.html',
@@ -24,6 +32,7 @@ export class FirmListComponent implements OnInit, OnDestroy {
   totalLengthOfCollection = 0;
   private firmId: number;
   isServiceError = false;
+
   constructor(private firmService: FirmService,
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
@@ -35,9 +44,6 @@ export class FirmListComponent implements OnInit, OnDestroy {
       name: ['', Validators.required],
       mobileNumber: ['', Validators.required],
       emailId: ['', [Validators.required, Validators.email]],
-      state: ['', Validators.required],
-      district: ['', Validators.required],
-      city: ['', Validators.required],
       address: ['', Validators.required]
     });
     this.getFirms();
@@ -46,11 +52,18 @@ export class FirmListComponent implements OnInit, OnDestroy {
   getFirms(): void {
     this.isLoading = true;
     this.subscription = this.firmService.getFirms().subscribe(firmData => {
+      this.setAddressFormat(firmData);
       this.firmData = firmData;
       this.isLoading = false;
     }, (error: any) => {
       console.log(error);
       this.isLoading = false;
+    });
+  }
+
+  setAddressFormat(firmData): void {
+    firmData.forEach(element => {
+      element['fullAddress'] = `${element.address}, ${element.city}, ${element.district}, ${element.state}`;
     });
   }
 
