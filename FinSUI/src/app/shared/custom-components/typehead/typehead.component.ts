@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { Subject, OperatorFunction, Observable, merge } from 'rxjs';
@@ -20,8 +20,6 @@ import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
   styleUrls: ['./typehead.component.scss']
 })
 export class TypeheadComponent implements OnInit {
-  model: any;
-
   @ViewChild('instance', {static: true}) instance: NgbTypeahead;
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
@@ -31,7 +29,8 @@ export class TypeheadComponent implements OnInit {
   @Input() iid: string;
   @Input() placeholder: string;
   @Input() formGroup: FormGroup;
-
+  @Output() valueChange = new EventEmitter();
+  
   search: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance?.isPopupOpen()));
@@ -39,22 +38,25 @@ export class TypeheadComponent implements OnInit {
 
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
       map(term => (term === '' ? this.dropdownData
-        : this.dropdownData.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
+        : this.dropdownData?.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
     );
   }
   constructor() {}
 
   ngOnInit(): void {
    this.formGroup.addControl(this.controlName, new FormControl());
-   this.onBlur();
   }
 
   onBlur() {
     const searchVal = this.formGroup.get(this.controlName).value;
-    if(searchVal && this.dropdownData.includes(searchVal)) {
+    if(searchVal && this.dropdownData?.includes(searchVal)) {
       return;
     } else {
       this.formGroup.get(this.controlName).setValue('');
     }
+  }
+
+  selectedItem(event): void {
+    this.valueChange.emit(event.item);
   }
 }

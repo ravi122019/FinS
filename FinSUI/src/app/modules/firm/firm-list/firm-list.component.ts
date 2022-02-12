@@ -24,15 +24,13 @@ export class FirmListComponent implements OnInit, OnDestroy {
   totalLengthOfCollection = 0;
   private firmId: number;
   isServiceError = false;
-  public statesArr = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado',
-  'Connecticut', 'Delaware', 'District Of Columbia', 'Federated States Of Micronesia', 'Florida', 'Georgia',
-  'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine',
-  'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana',
-  'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-  'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island',
-  'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Islands', 'Virginia',
-  'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-
+  locationData = {
+    "Latur": ["Latur", "Renapur", "Ahmedpur", "Udgir"],
+    "Osmanabad": ["Osmanabad", "Tuljapur", "Paranda"]
+  };
+  statesArr = ['Maharashtra'];
+  districtList = [];
+  cityList = [];
   constructor(private firmService: FirmService,
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
@@ -103,16 +101,20 @@ export class FirmListComponent implements OnInit, OnDestroy {
     }
 
     if (firm != null) {
+      this.districtList = Object.keys(this.locationData);
+      this.cityList = this.locationData[firm.district];
       // this.clientDetail = client;
       this.editAddLabel = 'Edit'
-      this.editClient.patchValue({
-        name: firm.name,
-        mobileNumber: firm.mobileNumber,
-        emailId: firm.emailId,
-        state: firm.state,
-        district: firm.district,
-        city: firm.city,
-        address: firm.address
+      setTimeout(() => {
+        this.editClient.patchValue({
+          name: firm.name,
+          mobileNumber: firm.mobileNumber,
+          emailId: firm.emailId,
+          state: firm.state,
+          district: firm.district,
+          city: firm.city,
+          address: firm.address
+        });
       });
       this.editedFirm = firm;
     }
@@ -172,8 +174,15 @@ export class FirmListComponent implements OnInit, OnDestroy {
       x.UserName?.toLowerCase().indexOf(v.toLowerCase()) !== -1 || x.Email?.toLowerCase().indexOf(v.toLowerCase()) !== -1);
   }
 
-  closeAlert(alert): void {
-    console.log('alert...', alert);
+  stateChangeEvent(event): void {
+    this.districtList = Object.keys(this.locationData);
+    this.cityList = [];
+    this.editClient.get('district').setValue('');
+    this.editClient.get('city').setValue('');
   }
 
+  districtChangeEvent(event): void {
+    this.cityList = this.locationData[event];
+    this.editClient.get('city').setValue('');
+  }
 }

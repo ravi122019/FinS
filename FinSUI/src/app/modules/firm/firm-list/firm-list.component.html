@@ -85,14 +85,16 @@
                     <div class="col-sm-12">
                         <!-- <input type="text" class="form-control" formControlName="state" id="state"> -->
                         <app-typehead controlName="state" iid="state" placeholder="Select State"
-                     [formGroup]="editClient" [isRequired]="true" ngDefaultControl [dropdownData]="statesArr"></app-typehead>
+                     [formGroup]="editClient" [isRequired]="true" ngDefaultControl [dropdownData]="statesArr"
+                     (valueChange)='stateChangeEvent($event)'></app-typehead>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="district" class="col-sm-6 col-form-label">District</label>
                     <div class="col-sm-12">
                         <app-typehead controlName="district" iid="district" placeholder="Select District"
-                        [formGroup]="editClient" [isRequired]="true" [dropdownData]="statesArr" ngDefaultControl></app-typehead>
+                        [formGroup]="editClient" [isRequired]="true" [dropdownData]="districtList"
+                        (valueChange)='districtChangeEvent($event)' ngDefaultControl></app-typehead>
                         <!-- <input type="text" class="form-control" formControlName="district" id="district"> -->
                     </div>
                 </div>
@@ -101,7 +103,7 @@
             <div class="form-group row">
                 <label for="city" class="col-sm-4 col-form-label">City</label>
                 <div class="col-sm-8">
-                    <app-typehead controlName="city" iid="city" [dropdownData]="statesArr" placeholder="Select City"
+                    <app-typehead controlName="city" iid="city" [dropdownData]="cityList" placeholder="Select City"
                      [formGroup]="editClient" [isRequired]="true" ngDefaultControl></app-typehead>
                 </div>
             </div>

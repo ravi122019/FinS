@@ -6,10 +6,11 @@
         class="form-control"
         [ngbTypeahead]="search"
         (focus)="focus$.next($any($event).target.value)"
-        (click)="click$.next($any($event).target.value)"
+        (click)="click$.next($any($event).target.value); "
         (blur)="onBlur()"
         [required]="isRequired"
         [formControlName]="controlName"
         #instance="ngbTypeahead"
+        (selectItem)="selectedItem($event)"
     />
 </span>
