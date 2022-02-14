@@ -1,19 +1,23 @@
 package com.fs.controller.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fs.constants.RoleConstants;
+import com.fs.context.FSContext;
 import com.fs.controller.base.BaseController;
 import com.fs.pojo.Firm;
 import com.fs.services.FirmService;
 import com.fs.services.base.Service;
 import com.fs.to.FirmTo;
+import com.fs.utils.DataBinderUtil;
 @RestController
 @RequestMapping("/firm")
 public class FirmController extends  BaseController<FirmTo, Firm>{
@@ -21,12 +25,8 @@ public class FirmController extends  BaseController<FirmTo, Firm>{
 	@Autowired
 	private FirmService service;
 	
-	/*
-	 * @Override protected Example<Firm> getExample(Map<String, String> map) { Firm
-	 * firm =new Firm(); firm.setName("implement"); Example<Firm> domain =
-	 * Example.of(firm); return domain; }
-	 */
-	
+	@Autowired
+	private DataBinderUtil binder;
 
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -46,10 +46,15 @@ public class FirmController extends  BaseController<FirmTo, Firm>{
 	}
 	
 	@SuppressWarnings({ "hiding", "rawtypes" })
-	@PreAuthorize("hasAuthority('Master')")
+//	@PreAuthorize("hasAuthority('Administrator', 'Master')")
 	@Override
 	public <FirmTo> ResponseEntity<List> getAll(Map<String, String> map) {
-		return super.getAll(map);
+		List<Object> list = new ArrayList<Object>();
+		if (FSContext.getUser() != null && FSContext.getUser().getUserRoles().contains(RoleConstants.MASTER_ROLE)) {
+			return super.getAll(map);
+		} else {
+			list.add(binder.toBusiness(service.findById(FSContext.getUser().getFirmId()), getBusinessObject()));
+			return new ResponseEntity<List>(list, HttpStatus.OK);
+		}
 	}
-
 }

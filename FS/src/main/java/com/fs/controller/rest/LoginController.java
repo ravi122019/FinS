@@ -1,17 +1,17 @@
 package com.fs.controller.rest;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.session.FindByIndexNameSessionRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fs.constants.FSExceptionConstants;
 import com.fs.context.FSContext;
 import com.fs.pojo.User;
 import com.fs.services.UserService;
@@ -36,7 +36,22 @@ public class LoginController {
 	
 	@Autowired
 	private DataBinderUtil binder;
+	
+	
+	@SuppressWarnings("rawtypes")
+	@Autowired
+	private FindByIndexNameSessionRepository sessionRepository;
 
+	@SuppressWarnings("unchecked")
+	@PostMapping
+	@RequestMapping(value = "/logout")
+	public ResponseEntity<Object> logout(@RequestBody UserTo userInfo) throws Exception {
+
+		sessionRepository
+				.findByIndexNameAndIndexValue(FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME, userInfo.getLoginName())
+				.keySet().forEach(session -> sessionRepository.deleteById((String) session));
+		return new ResponseEntity<Object>("Logout successfully", HttpStatus.OK);
+	}
 	
 	@PostMapping
 	@RequestMapping(value = "/authenticate")
@@ -45,17 +60,19 @@ public class LoginController {
 		try {
 			user = userService.getUserByLoginNameAndPassword(userInfo.getLoginName(), userInfo.getPassword());
 		} catch (BadCredentialsException e) {
-			return new ResponseEntity<Object>(new String("UnAuthorized User."), HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<Object>(FSExceptionConstants.UN_AUTHORIZED_USER, HttpStatus.UNAUTHORIZED);
 		}
-		if(user==null) {
-			return new ResponseEntity<Object>(new String("UnAuthorized User."), HttpStatus.UNAUTHORIZED);
-		}
+		
+		if (user == null || (user.getFirm() != null && (Boolean.FALSE.equals(user.getFirm().getIsActive())
+				|| Boolean.TRUE.equals(user.getFirm().getDeleteStatus())))) {
+			return new ResponseEntity<Object>(new String(FSExceptionConstants.UN_AUTHORIZED_USER), HttpStatus.UNAUTHORIZED);
+		} 
 		final UserDetails userDetails = loginDetailService.loadUserByUsername(userInfo.getLoginName());
-		user.setLastLogin(new Date());
-		userService.save(user);
 		AuthonticatedUserTo userTo = (AuthonticatedUserTo) binder.toBusiness(user, AuthonticatedUserTo.class);
 		String key=jwtUtil.generateToken(userDetails);
 		FSContext.createAuthenticatedSession(user);
+		//user.setLastLogin(new Date());
+		//userService.save(user);
 		return new ResponseEntity<Object>(new LoginWithKey(key,userTo), HttpStatus.OK);
 	}
 

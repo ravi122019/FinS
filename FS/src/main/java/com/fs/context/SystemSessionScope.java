@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.fs.pojo.Firm;
+import com.fs.pojo.User;
 
 public class SystemSessionScope implements SessionScope<Map<String, Object>>{
 
@@ -64,6 +65,12 @@ public class SystemSessionScope implements SessionScope<Map<String, Object>>{
 
 	@Override
 	public Firm getFirm() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User getUser() {
 		// TODO Auto-generated method stub
 		return null;
 	}

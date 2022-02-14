@@ -1,8 +1,11 @@
 package com.fs.pojo;
 
+import java.beans.Transient;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -102,6 +105,14 @@ public class User extends FirmAwareImpl{
 	@Column(name = "LastLogin" , nullable = true, unique = false)
 	private Date lastLogin;
 
+	@Transient
+	public Set<String> getUserRoles() {
+		if (!this.roles.isEmpty()) {
+			return this.roles.stream().map(Role::getName).collect(Collectors.toSet());
+		}
+		return new HashSet<String>();
+	}
+	
 	public Long getId() {
 		return id;
 	}

@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.session.FindByIndexNameSessionRepository;
+
 import com.fs.pojo.Firm;
 import com.fs.pojo.User;
 
@@ -70,11 +72,16 @@ public abstract class FSContext {
 		session=context.getSession(true);
 		session.put(SessionScope.LOGIN_NAME, user.getLoginName());
 		session.put(SessionScope.USER_ID, user.getId());
+		session.put(SessionScope.USER, user);
 		session.put(SessionScope.FIRM_ID, user.getFirmId());
 		session.put(SessionScope.FIRM, user.getFirm());
 		if(session.getSource() instanceof HttpSession) {
-			Long timeout = 15L * 60L;
-			((HttpSession)session.getSource()).setMaxInactiveInterval(timeout.intValue());
+			/*
+			 * Long timeout = 15L * 60L;
+			 * ((HttpSession)session.getSource()).setMaxInactiveInterval(timeout.intValue())
+			 * ;
+			 */
+			((HttpSession)session.getSource()).setAttribute(FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME,user.getLoginName());
 		}
 		
 		return session;
@@ -96,6 +103,10 @@ public abstract class FSContext {
 	
 	public static Firm getFirm() {
 		return currentSession().getFirm();
+	}
+	
+	public static User getUser() {
+		return currentSession().getUser();
 	}
 	
 	private static class NullFSContext extends FSContext{

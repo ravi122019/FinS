@@ -1,5 +1,7 @@
 package com.fs.utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.BeanWrapper;
@@ -11,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import com.fs.context.FSContext;
-import com.fs.context.SessionScope;
 import com.fs.pojo.base.FirmAware;
 
 public final class QueryParamUtil {
@@ -41,6 +42,29 @@ public final class QueryParamUtil {
 		
 		return Example.of(obj);
 	}
+	
+	@SuppressWarnings("rawtypes")
+	public static List<Example> getFirmExamples(Class clz) {
+		List<Example> examples = new ArrayList<Example>();
+		BeanWrapper src = new BeanWrapperImpl(clz);
+		Object obj = src.getWrappedInstance();
+		if(obj instanceof FirmAware) {
+			FirmAware baseFirm = (FirmAware) obj;
+			baseFirm.setFirmId(1l);
+			baseFirm.setDeleteStatus(Boolean.FALSE);
+			
+			FirmAware userFirm = (FirmAware) obj;
+			userFirm.setFirmId(FSContext.getFirmId());
+			userFirm.setDeleteStatus(Boolean.FALSE);
+			
+			examples.add(Example.of(baseFirm));
+			examples.add(Example.of(userFirm));
+		}
+		
+		return examples;
+	}
+	
+	
 	
 	public static Pageable getPageable(Map<String, String> map) {
 		//TODO:limit=value
