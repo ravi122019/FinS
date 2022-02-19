@@ -23,6 +23,7 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
   totalLengthOfCollection = 0;
   private expenseTypeId: number;
   isServiceError = false;
+  firmID;
 
   constructor(private expenseService: ExpenseService,
     private modalService: NgbModal,
@@ -35,6 +36,7 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
       name: ['', Validators.required],
     });
     this.getExpenses();
+    this.firmID= sessionStorage.getItem('firmId');
   }
 
   getExpenses(): void {

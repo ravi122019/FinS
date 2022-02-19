@@ -41,6 +41,8 @@ export class LoginComponent {
     this.subscription = this.loginService.login(uname, password).subscribe((res: any) => {
       this.authService.setAuthToken(res.aceess_key);
       sessionStorage.setItem('authToken', res.aceess_key);
+      sessionStorage.setItem('userName', res.userDto.firstName+' '+res.userDto.lastName);
+      sessionStorage.setItem('firmId', res.userDto.firmId);
       this.routes.navigate(['/starter']);
       this.isLoading = false;
     }, (error: any) => {
