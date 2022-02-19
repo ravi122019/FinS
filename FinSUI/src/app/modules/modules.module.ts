@@ -9,6 +9,7 @@ import { ModulesRoutes } from './modules.routing';
 import { FirmListComponent } from './firm/firm-list/firm-list.component';
 import { LoaderComponent } from '../shared/custom-components/loader/loader.component';
 import { TypeheadComponent } from '../shared/custom-components/typehead/typehead.component';
+import { DesignationListComponent } from './designation/designation-list/designation-list.component';
 
 /**
  * Custom angular notifier options
@@ -65,7 +66,8 @@ import { TypeheadComponent } from '../shared/custom-components/typehead/typehead
   declarations: [
     FirmListComponent,
     LoaderComponent,
-    TypeheadComponent
+    TypeheadComponent,
+    DesignationListComponent
   ]
 })
 export class ModulesModule { }

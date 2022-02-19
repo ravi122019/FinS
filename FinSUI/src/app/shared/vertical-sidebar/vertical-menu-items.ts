@@ -15,7 +15,15 @@ export const ROUTES: RouteInfo[] = [
       class: '',
       extralink: false,
       submenu: []
-    },]
+    },
+    {
+      path: '/modules/designation/designation-list',
+      title: 'Designations',
+      icon: 'mdi mdi-adjust',
+      class: '',
+      extralink: false,
+      submenu: []
+    }]
   },
   {
     path: 'component',

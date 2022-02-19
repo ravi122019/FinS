@@ -6,6 +6,9 @@ export const API_ENDPOINT = {
     },
     firm: {
         getFirm: 'firm'
+    },
+    designation: {
+        getDesignation: 'designation'
     }
 }
 
@@ -17,5 +20,8 @@ export class GetApiEndPoints {
     }
     public static getFirm = {
         getUrl: () => `${environment.baseURI}${API_ENDPOINT.firm.getFirm}`
+    }
+    public static getDesignation = {
+        getUrl: () => `${environment.baseURI}${API_ENDPOINT.designation.getDesignation}`
     }
 }
