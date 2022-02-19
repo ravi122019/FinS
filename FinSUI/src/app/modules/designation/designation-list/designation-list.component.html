@@ -23,9 +23,11 @@
                                     <ngb-highlight [result]="designation[item.id]" [term]="csearchTerm"></ngb-highlight>
                                 </td>
                                 <td>
+                                    <div *ngIf="designation.firmId != 1">
                                     <i class="ti-pencil text-info m-r-10 pointer"
                                         (click)="openDesignationModal(editModal, designation)"></i>
                                     <i class="ti-trash text-danger pointer" (click)="showDeleteDesignation(deleteDesignationModal, designation.designationId);"></i>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
