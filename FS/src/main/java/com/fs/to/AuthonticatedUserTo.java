@@ -15,6 +15,9 @@ public class AuthonticatedUserTo {
 	@JsonAlias("id")
 	private Long id;
 	
+	@JsonProperty("frimId")
+	private Long firmId;
+	
 	@JsonProperty("firstName")
 	private String firstName;
 	
@@ -35,7 +38,14 @@ public class AuthonticatedUserTo {
 	
 	@JsonProperty("lastLogin")
 	private Date lastLogin;
-	
+
+	public Long getFirmId() {
+		return firmId;
+	}
+
+	public void setFirmId(Long firmId) {
+		this.firmId = firmId;
+	}
 
 	public List<RoleTo> getRoles() {
 		return roles;

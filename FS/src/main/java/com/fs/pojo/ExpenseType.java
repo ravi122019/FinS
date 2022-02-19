@@ -20,7 +20,7 @@ public class ExpenseType extends FirmAwareImpl {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(name = "Name", nullable = false, unique = false)
+	@Column(name = "Name", nullable = false, unique = true)
 	private String name;
 
 	public Long getId() {

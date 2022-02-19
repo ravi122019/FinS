@@ -50,6 +50,14 @@ public class LoginController {
 		sessionRepository
 				.findByIndexNameAndIndexValue(FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME, userInfo.getLoginName())
 				.keySet().forEach(session -> sessionRepository.deleteById((String) session));
+		
+		/*
+		 * sessionRepository
+		 * .findByIndexNameAndIndexValue(FindByIndexNameSessionRepository.
+		 * PRINCIPAL_NAME_INDEX_NAME, "") .keySet().forEach(session ->
+		 * sessionRepository.deleteById((String) session));
+		 */
+		
 		return new ResponseEntity<Object>("Logout successfully", HttpStatus.OK);
 	}
 	
@@ -73,6 +81,7 @@ public class LoginController {
 		FSContext.createAuthenticatedSession(user);
 		//user.setLastLogin(new Date());
 		//userService.save(user);
+		userTo.setFirmId(FSContext.getFirmId());
 		return new ResponseEntity<Object>(new LoginWithKey(key,userTo), HttpStatus.OK);
 	}
 
@@ -80,7 +89,8 @@ public class LoginController {
 	class LoginWithKey {
 		private String aceess_key;
 		private AuthonticatedUserTo userTo;
-		LoginWithKey(String aceess_key,AuthonticatedUserTo userTo){
+		
+		LoginWithKey(String aceess_key, AuthonticatedUserTo userTo){
 			this.aceess_key=aceess_key;
 			this.userTo=userTo;
 		}

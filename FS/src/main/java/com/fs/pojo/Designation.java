@@ -25,7 +25,7 @@ public class Designation extends FirmAwareImpl{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(name = "Name", nullable = false, unique = false)
+	@Column(name = "Name", nullable = false, unique = true)
 	private String name;
 	
 	@OneToOne(cascade=CascadeType.ALL)  
