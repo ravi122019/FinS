@@ -4,12 +4,12 @@ export const ROUTES: RouteInfo[] = [
   
   {
     path: 'modules',
-    title: 'Modules',
+    title: 'Masters',
     icon: 'cpu',
     class: 'has-arrow',
     extralink: false,
     submenu: [{
-      path: '/modules/firm/firm-list',
+      path: '/master/firms',
       title: 'Firm',
       icon: 'mdi mdi-adjust',
       class: '',
@@ -17,7 +17,7 @@ export const ROUTES: RouteInfo[] = [
       submenu: []
     },
     {
-      path: '/modules/designation/designation-list',
+      path: '/master/designations',
       title: 'Designations',
       icon: 'mdi mdi-adjust',
       class: '',
@@ -25,7 +25,15 @@ export const ROUTES: RouteInfo[] = [
       submenu: []
     },
     {
-      path: '/modules/expense/expense-list',
+      path: '/master/users',
+      title: 'Users',
+      icon: 'mdi mdi-adjust',
+      class: '',
+      extralink: false,
+      submenu: []
+    },
+    {
+      path: '/master/expenses',
       title: 'Expense Type',
       icon: 'mdi mdi-adjust',
       class: '',

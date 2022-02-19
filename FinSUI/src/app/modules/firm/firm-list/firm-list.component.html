@@ -57,7 +57,7 @@
     </div>
 
     <div class="modal-body">
-         <ngb-alert *ngIf="isServiceError" [type]="'danger'" (closed)="isServiceError=false">{{MESSAGES.serviceError}}</ngb-alert>
+         <ngb-alert *ngIf="isServiceError" [type]="'danger'" (closed)="isServiceError=false">{{errorMsg}}</ngb-alert>
         <form [formGroup]="editClient" (ngSubmit)="saveFirms()">
 
 

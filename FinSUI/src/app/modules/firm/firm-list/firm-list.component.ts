@@ -31,6 +31,7 @@ export class FirmListComponent implements OnInit, OnDestroy {
   statesArr = ['Maharashtra'];
   districtList = [];
   cityList = [];
+  errorMsg = '';
   constructor(private firmService: FirmService,
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
@@ -128,27 +129,30 @@ export class FirmListComponent implements OnInit, OnDestroy {
         this.editedFirm[key] = payload[key];
       }
       this.subscription = this.firmService.edirFirms(this.editedFirm).subscribe(response => {
-        this.isLoading = false;
-        this.closeBtnClick();
-        this.getFirms();
-        this.notifier.notify( 'success', MESSAGES.firm.update );
+        this.handleFirmSuccess(this.editAddLabel);
       }, (error: any) => {
-        console.log(error);
-        this.isLoading = false;
-        this.isServiceError = true;
+        this.handleFirmError(error);
       })
     } else {
       this.subscription = this.firmService.postFirms(payload).subscribe(response => {
-        this.isLoading = false;
-        this.closeBtnClick();
-        this.getFirms();
-        this.notifier.notify( 'success', MESSAGES.firm.add );
+        this.handleFirmSuccess(this.editAddLabel);
       }, (error: any) => {
-        console.log(error);
-        this.isLoading = false;
-        this.isServiceError = true;
+        this.handleFirmError(error);
       })
     }
+  }
+
+  handleFirmError(error): void {
+    this.isLoading = false;
+    this.isServiceError = true;
+    this.errorMsg = error;
+  }
+
+  handleFirmSuccess(editAddLabel): void {
+    this.isLoading = false;
+    this.closeBtnClick();
+    this.getFirms();
+    this.notifier.notify( 'success', (editAddLabel === 'Edit') ? MESSAGES.firm.update : MESSAGES.firm.add );
   }
 
   closeBtnClick() {

@@ -8,7 +8,7 @@ export const ModulesRoutes: Routes = [
 		path: '',
 		children: [
 			{
-				path: 'firm/firm-list',
+				path: 'firms',
 				component: FirmListComponent,
 				data: {
 					title: 'Firm',
@@ -19,7 +19,7 @@ export const ModulesRoutes: Routes = [
 				}
 			},
 			{
-				path: 'designation/designation-list',
+				path: 'designations',
 				component: DesignationListComponent,
 				data: {
 					title: 'Designations',
@@ -31,7 +31,7 @@ export const ModulesRoutes: Routes = [
 			}
 			,
 			{
-				path: 'expense/expense-list',
+				path: 'expenses',
 				component: ExpenseListComponent,
 				data: {
 					title: 'Expense type',
@@ -40,6 +40,10 @@ export const ModulesRoutes: Routes = [
 						{ title: 'Expense type-List' }
 					]
 				}
+			},
+			{
+				path: 'users',
+				loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
 			}
 
 		]
