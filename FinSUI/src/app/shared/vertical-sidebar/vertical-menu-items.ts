@@ -23,6 +23,14 @@ export const ROUTES: RouteInfo[] = [
       class: '',
       extralink: false,
       submenu: []
+    },
+    {
+      path: '/modules/expense/expense-list',
+      title: 'Expense Type',
+      icon: 'mdi mdi-adjust',
+      class: '',
+      extralink: false,
+      submenu: []
     }]
   },
   {

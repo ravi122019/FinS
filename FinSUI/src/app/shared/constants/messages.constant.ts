@@ -13,5 +13,10 @@ export const MESSAGES = {
         update: 'Designation Data Updated Successfully!',
         delete: 'Designation Deleted Successfully!'
     },
+    expense: {
+        add: 'Expense Type Created Successfully!',
+        update: 'Expense Type Data Updated Successfully!',
+        delete: 'Expense Type Deleted Successfully!'
+    },
     serviceError: 'Service Error, Please Contact System Administrator!'
 }

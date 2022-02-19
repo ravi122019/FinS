@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { FirmListComponent } from './firm/firm-list/firm-list.component';
 import { DesignationListComponent } from './designation/designation-list/designation-list.component';
+import { ExpenseListComponent } from './expenses/expenses-list/expenses-list.component';
 
 export const ModulesRoutes: Routes = [
 	{
@@ -25,6 +26,18 @@ export const ModulesRoutes: Routes = [
 					urls: [
 						{ title: 'Designation' },
 						{ title: 'Designation-List' }
+					]
+				}
+			}
+			,
+			{
+				path: 'expense/expense-list',
+				component: ExpenseListComponent,
+				data: {
+					title: 'Expense type',
+					urls: [
+						{ title: 'Expense type' },
+						{ title: 'Expense type-List' }
 					]
 				}
 			}

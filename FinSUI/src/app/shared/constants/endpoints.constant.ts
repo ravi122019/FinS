@@ -9,6 +9,9 @@ export const API_ENDPOINT = {
     },
     designation: {
         getDesignation: 'designation'
+    },
+    expense: {
+        getDesignation: 'expenseType'
     }
 }
 
@@ -23,5 +26,8 @@ export class GetApiEndPoints {
     }
     public static getDesignation = {
         getUrl: () => `${environment.baseURI}${API_ENDPOINT.designation.getDesignation}`
+    }
+    public static getExpense = {
+        getUrl: () => `${environment.baseURI}${API_ENDPOINT.expense.getDesignation}`
     }
 }

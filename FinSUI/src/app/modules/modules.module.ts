@@ -10,6 +10,7 @@ import { FirmListComponent } from './firm/firm-list/firm-list.component';
 import { LoaderComponent } from '../shared/custom-components/loader/loader.component';
 import { TypeheadComponent } from '../shared/custom-components/typehead/typehead.component';
 import { DesignationListComponent } from './designation/designation-list/designation-list.component';
+import { ExpenseListComponent } from './expenses/expenses-list/expenses-list.component';
 
 /**
  * Custom angular notifier options
@@ -67,7 +68,8 @@ import { DesignationListComponent } from './designation/designation-list/designa
     FirmListComponent,
     LoaderComponent,
     TypeheadComponent,
-    DesignationListComponent
+    DesignationListComponent,
+    ExpenseListComponent
   ]
 })
 export class ModulesModule { }
