@@ -20,6 +20,10 @@ public class BaseTo {
 	
 	@JsonProperty("deleteStatus")
 	private Boolean deleteStatus;
+	
+	@JsonProperty("firmId")
+	private Long firmId;
+	
 
 	public Boolean getDeleteStatus() {
 		return deleteStatus;
@@ -59,5 +63,13 @@ public class BaseTo {
 
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
+	}
+
+	public Long getFirmId() {
+		return firmId;
+	}
+
+	public void setFirmId(Long firmId) {
+		this.firmId = firmId;
 	}
 }

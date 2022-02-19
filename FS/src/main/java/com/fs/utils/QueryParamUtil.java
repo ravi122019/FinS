@@ -47,17 +47,20 @@ public final class QueryParamUtil {
 	public static List<Example> getFirmExamples(Class clz) {
 		List<Example> examples = new ArrayList<Example>();
 		BeanWrapper src = new BeanWrapperImpl(clz);
-		Object obj = src.getWrappedInstance();
-		if(obj instanceof FirmAware) {
-			FirmAware baseFirm = (FirmAware) obj;
-			baseFirm.setFirmId(1l);
-			baseFirm.setDeleteStatus(Boolean.FALSE);
-			
-			FirmAware userFirm = (FirmAware) obj;
+		Object firmObj = src.getWrappedInstance();
+		if(firmObj instanceof FirmAware) {
+			if (!FSContext.getFirmId().equals(1l)) {
+				FirmAware baseFirm = (FirmAware) firmObj;
+				baseFirm.setFirmId(1l);
+				baseFirm.setDeleteStatus(Boolean.FALSE);
+				examples.add(Example.of(baseFirm));
+			}
+			BeanWrapper userfirmSource = new BeanWrapperImpl(clz);
+			Object userFirmObj = userfirmSource.getWrappedInstance();
+			FirmAware userFirm = (FirmAware) userFirmObj;
 			userFirm.setFirmId(FSContext.getFirmId());
 			userFirm.setDeleteStatus(Boolean.FALSE);
 			
-			examples.add(Example.of(baseFirm));
 			examples.add(Example.of(userFirm));
 		}
 		

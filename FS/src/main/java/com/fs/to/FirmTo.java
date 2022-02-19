@@ -4,9 +4,8 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fs.to.base.BaseTo;
 
-public class FirmTo extends BaseTo {
+public class FirmTo {
 
 	@JsonProperty("firmId")
 	@JsonAlias("id")
@@ -53,6 +52,21 @@ public class FirmTo extends BaseTo {
 
 	@JsonProperty("isActive")
 	private Boolean isActive;
+	
+	@JsonProperty("modifiedTimeStamp")
+	private Date modifiedTimeStamp;
+	
+	@JsonProperty("createdTimeStamp")
+	private Date createdTimeStamp;
+	
+	@JsonProperty("modifiedBy")
+	private String modifiedBy;
+	
+	@JsonProperty("createdBy")
+	private String createdBy;
+	
+	@JsonProperty("deleteStatus")
+	private Boolean deleteStatus;
 
 	public Long getId() {
 		return id;
@@ -172,5 +186,45 @@ public class FirmTo extends BaseTo {
 
 	public void setDistrict(String district) {
 		this.district = district;
+	}
+
+	public Date getModifiedTimeStamp() {
+		return modifiedTimeStamp;
+	}
+
+	public void setModifiedTimeStamp(Date modifiedTimeStamp) {
+		this.modifiedTimeStamp = modifiedTimeStamp;
+	}
+
+	public Date getCreatedTimeStamp() {
+		return createdTimeStamp;
+	}
+
+	public void setCreatedTimeStamp(Date createdTimeStamp) {
+		this.createdTimeStamp = createdTimeStamp;
+	}
+
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Boolean getDeleteStatus() {
+		return deleteStatus;
+	}
+
+	public void setDeleteStatus(Boolean deleteStatus) {
+		this.deleteStatus = deleteStatus;
 	}
 }
