@@ -20,6 +20,7 @@ export class VerticalNavigationComponent implements AfterViewInit {
   public config: PerfectScrollbarConfigInterface = {};
 
   public showSearch = false;
+  userName='';
 
   // This is for Notifications
   notifications: Object[] = [
@@ -118,6 +119,7 @@ export class VerticalNavigationComponent implements AfterViewInit {
 
   constructor(private modalService: NgbModal, private translate: TranslateService, private myserviceService: MyserviceService) {
     translate.setDefaultLang('en');
+    this.userName= sessionStorage.getItem('userName');
   }
 
   changeLanguage(lang: any) {

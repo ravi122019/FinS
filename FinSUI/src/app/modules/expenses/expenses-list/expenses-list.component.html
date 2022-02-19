@@ -23,9 +23,11 @@
                                     <ngb-highlight [result]="expense[item.id]" [term]="csearchTerm"></ngb-highlight>
                                 </td>
                                 <td>
+                                    <div *ngIf="(expense.firmId != 1) || firmID == 1">
                                     <i class="ti-pencil text-info m-r-10 pointer"
                                         (click)="openExpenseModal(editModal, expense)"></i>
                                     <i class="ti-trash text-danger pointer" (click)="showDeleteExpense(deleteExpenseModal, expense.expenseTypeId);"></i>
+                                </div>
                                 </td>
                             </tr>
                         </tbody>

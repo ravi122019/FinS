@@ -23,6 +23,7 @@ export class DesignationListComponent implements OnInit, OnDestroy {
   totalLengthOfCollection = 0;
   private designationId: number;
   isServiceError = false;
+  firmID;
 
   constructor(private designationService: DesignationService,
     private modalService: NgbModal,
@@ -35,6 +36,7 @@ export class DesignationListComponent implements OnInit, OnDestroy {
       name: ['', Validators.required],
     });
     this.getDesignations();
+    this.firmID= sessionStorage.getItem('firmId');
   }
 
   getDesignations(): void {
