@@ -11,7 +11,7 @@ export class DesignationService {
   constructor(private httpService: HttpClientCoreService) { }
 
   public getDesignations(): Observable<any> {
-    const endPoint = GetApiEndPoints.getDesignation.getUrl();
+    const endPoint = GetApiEndPoints.getDesignation.getUrl()+'/getGlobal';
     return this.httpService.get(endPoint);
   }
 

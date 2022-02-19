@@ -11,10 +11,9 @@ export class ExpenseService {
   constructor(private httpService: HttpClientCoreService) { }
 
   public getExpenses(): Observable<any> {
-    const endPoint = GetApiEndPoints.getExpense.getUrl();
+    const endPoint = GetApiEndPoints.getExpense.getUrl()+'/getGlobal';
     return this.httpService.get(endPoint);
   }
-
   public postExpense(payload): Observable<any> {
     const endPoint = GetApiEndPoints.getExpense.getUrl();
     return this.httpService.post(endPoint, payload);
