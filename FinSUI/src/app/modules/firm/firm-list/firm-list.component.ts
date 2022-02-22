@@ -4,6 +4,7 @@ import { NgbModal, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { NotifierOptions, NotifierService } from 'angular-notifier';
 import { merge, Observable, OperatorFunction, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { LOCATION } from 'src/app/shared/constants/common/location.constant';
 import { FIRM_COLUMN } from 'src/app/shared/constants/firm/firm.constant';
 import { MESSAGES } from 'src/app/shared/constants/messages.constant';
 import { FirmService } from 'src/app/shared/services/common/firm/firm.service';
@@ -24,47 +25,13 @@ export class FirmListComponent implements OnInit, OnDestroy {
   totalLengthOfCollection = 0;
   private firmId: number;
   isServiceError = false;
-  locationData = {
-    "Ahmednagar": ["Nagar", "Shevgaon", "Pathardi", "Parner", "Sangamner", "Kopargaon", "Akole", "Shrirampur", "Nevasa", "Rahata", "Rahuri", "Shrigonda", "Karjat", "Jamkhed"],
-    "Akola": ["Akola", "Akot", "Telhara", "Balapur", "Patur", "Murtajapur", "Barshitakli"],
-    "Amravati": ["Amravati", "Bhatukali", "Nandgaon Khandeshwar", "Dharni", "Chikhaldara", "Achalpur", "Chandurbazar", "Morshi", "Warud", "Daryapur", "Anjangaon-Surji", "Chandur", "Dhamangaon", "Tiosa"],
-    "Aurangabad": ["Aurangabad", "Kannad", "Soegaon", "Sillod", "Phulambri", "Khuldabad", "Vaijapur", "Gangapur", "Paithan"],
-    "Beed": ["Beed", "Ashti", "Patoda", "ShirurKasar", "Georai", "Majalgaon", "Wadwani", "Kaij", "Dharur", "Parli", "Ambejogai"],
-    "Bhandara": ["Bhandara", "Tumsar", "Pauni", "Mohadi", "Sakoli", "Lakhni", "Lakhandur"],
-    "Buldhana": ["Buldhana", "Chikhli", "Deulgaon Raja", "Jalgaon Jamod", "Sangrampur", "Malkapur", "Motala", "Nandura", "Khamgaon", "Shegaon", "Mehkar", "Sindkhed Raja", "Lonar"],
-    "Chandrapur": ["Chandrapur", "Saoli", "Mul", "Ballarpur", "Pombhurna", "Gondpimpri", "Warora", "Chimur", "Bhadravati", "Bramhapuri", "Nagbhid", "Sindewahi", "Rajura", "Korpana", "Jivati"],
-    "Dhule": ["Dhule", "Sakri", "Sindkheda", "Shirpur"],
-    "Gadchiroli": ["Gadchiroli", "Dhanora", "Chamorshi", "Mulchera", "Desaiganj", "Armori", "Kurkheda", "Korchi", "Aheri", "Bhamragad", "Sironcha"],
-    "Gondia": ["Gondia", "Tirora", "Goregaon", "Arjuni Morgaon", "Amgaon", "Salekasa", "Sadak Arjuni", "Deori"],
-    "Hingoli": ["Hingoli", "Sengaon", "Kalamnuri", "Basmath", "Aundha Nagnath"],
-    "Jalgaon": ["Jalgaon", "Jamner", "Erandol", "Dharangaon", "Bhusawal", "Raver", "Muktainagar", "Bodwad", "Yawal", "Amalner", "Parola", "Chopda", "Pachora", "Bhadgaon", "Chalisgaon"],
-    "Jalna": ["Jalna", "Bhokardan", "Jafrabad", "Badnapur", "Ambad", "Ghansawangi", "Partur", "Mantha"],
-    "Kolhapur": ["Karvir", "Panhala", "Shahuwadi", "Kagal", "Hatkanangale", "Shirol", "Radhanagari", "Gaganbawada", "Bhudargad", "Gadhinglaj", "Chandgad", "Ajra"],
-    "Latur": ["Latur", "Renapur", "Ahmedpur", "Jalkot", "Chakur", "Shirur Anantpal", "Ausa", "Nilanga", "Deoni", "Udgir"],
-    "Mumbai": ["Kurla", "Andheri", "Borivali"],
-    "Nagpur": ["Nagpur Urban", "Nagpur Rural", "Kamptee", "Hingna", "Katol", "Narkhed", "Savner", "Kalameshwar", "Ramtek", "Mouda", "Parseoni", "Umred", "Kuhi", "Bhiwapur"],
-    "Nanded": ["Nanded", "Ardhapur", "Mudkhed", "Bhokar", "Umri", "Loha", "Kandhar", "Kinwat", "Himayatnagar", "Hadgaon", "Mahur", "Deglur", "Mukhed", "Dharmabad", "Biloli", "Naigaon"],
-    "Nandurbar": ["Nandurbar", "Navapur", "Shahada", "Talode", "Akkalkuwa", "Akrani"],
-    "Nashik": ["Nashik", "Igatpuri", "Dindori", "Peth", "Trimbakeshwar", "Kalwan", "Deola", "Surgana", "Baglan", "Malegaon", "Nandgaon", "Chandwad", "Niphad", "Sinnar", "Yeola"],
-    "Osmanabad": ["Osmanabad", "Tuljapur", "Bhum", "Paranda", "Washi", "Kalamb", "Lohara", "Umarga"],
-    "Palghar": ["Palghar", "Vasai", "Dahanu", "Talasari", "Jawhar", "Mokhada", "Vada", "Vikramgad"],
-    "Parbhani": ["Parbhani", "Sonpeth", "Gangakhed", "Palam", "Purna", "Sailu", "Jintur", "Manwath", "Pathri"],
-    "Pune": ["Pune City", "Haveli", "Khed Rajgurunagar", "Junnar", "Ambegaon Ghodegaon", "Maval Vadgaon", "Mulshi Paud", "Shirur", "Purandhar Saswad", "Velhe", "Bhor", "Baramati", "Indapur", "Daund"],
-    "Raigad": ["Pen", "Alibaug", "Murud", "Panvel", "Uran", "Karjat", "Khalapur", "Mangaon", "Tala", "Roha", "Sudhagad", "Mahad", "Poladpur", "Shrivardhan", "Mhasla"],
-    "Ratnagiri": ["Ratnagiri", "Sangameshwar", "Lanja", "Rajapur", "Chiplun", "Guhagar", "Dapoli", "Mandangad", "Khed"],
-    "Sangli": ["Miraj", "Kavathe Mahankal", "Tasgaon", "Jat", "Walwa Islampur", "Shirala", "Khanapur Vita", "Atpadi", "Palus", "Kadegaon"],
-    "Satara": ["Satara", "Jaoli", "Koregaon", "Wai", "Mahabaleshwar", "Khandala", "Phaltan", "Maan Dahiwadi", "Khatav Vaduj", "Patan", "Karad"],
-    "Sindhudurg": ["Kankavli", "Vaibhavwadi", "Devgad", "Malwan", "Sawantwadi", "Kudal", "Vengurla", "Dodamarg"],
-    "Solapur": ["Solapur North", "Barshi", "Solapur South", "Akkalkot", "Madha", "Karmala", "Pandharpur", "Mohol", "Malshiras", "Sangole", "Mangalvedhe"],
-    "Thane": ["Thane", "Kalyan", "Murbad", "Bhiwandi", "Shahapur", "Ulhasnagar", "Ambarnath"],
-    "Wardha": ["Wardha", "Deoli", "Seloo", "Arvi", "Ashti", "Karanja", "Hinganghat", "Samudrapur"],
-    "Washim": ["Washim", "Malegaon", "Risod", "Mangrulpir", "Karanja", "Manora"],
-    "Yavatmal": ["Yavatmal", "Arni", "Babhulgaon", "Kalamb", "Darwha", "Digras", "Ner", "Pusad", "Umarkhed", "Mahagaon", "Kelapur", "Ralegaon", "Ghatanji", "Wani", "Maregaon", "Zari Jamani"]
-  };
+  locationData = LOCATION;
   statesArr = ['Maharashtra'];
   districtList = [];
   cityList = [];
   errorMsg = '';
+  throttle = 300;
+  isInline = false;
   constructor(private firmService: FirmService,
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
@@ -80,18 +47,22 @@ export class FirmListComponent implements OnInit, OnDestroy {
       registrationId: [''],
       pancard:['', Validators.pattern("[A-Z]{5}[0-9]{4}[A-Z]{1}")]
     });
-    this.getFirms();
+    this.getFirms(true);
   }
 
-  getFirms(): void {
-    this.isLoading = true;
+  getFirms(isInit: boolean): void {
+    this.isLoading = isInit;
+    if (this.isInline) {
+      return;
+    }
+    this.isInline = !isInit;
     this.subscription = this.firmService.getFirms().subscribe(firmData => {
       this.setAddressFormat(firmData);
-      this.firmData = firmData;
-      this.isLoading = false;
+      this.firmData = [...this.firmData, ...firmData];
+      this.isLoading = this.isInline = false;
     }, (error: any) => {
       console.log(error);
-      this.isLoading = false;
+      this.isLoading = this.isInline = false;
     });
   }
 
@@ -115,7 +86,7 @@ export class FirmListComponent implements OnInit, OnDestroy {
     this.subscription = this.firmService.deleteFirms(this.firmId).subscribe(response => {
       this.isLoading = false;
       this.closeBtnClick();
-      this.getFirms();
+      this.getFirms(true);
       this.notifier.notify( 'success', MESSAGES.firm.delete );
     }, (error: any) => {
       console.log(error);
@@ -188,7 +159,7 @@ export class FirmListComponent implements OnInit, OnDestroy {
   handleFirmSuccess(editAddLabel): void {
     this.isLoading = false;
     this.closeBtnClick();
-    this.getFirms();
+    this.getFirms(true);
     this.notifier.notify( 'success', (editAddLabel === 'Edit') ? MESSAGES.firm.update : MESSAGES.firm.add );
   }
 
@@ -225,5 +196,14 @@ export class FirmListComponent implements OnInit, OnDestroy {
   districtChangeEvent(event): void {
     this.cityList = this.locationData[event];
     this.editClient.get('city').setValue('');
+  }
+
+  onScrollDown() {
+    console.log('scrolled down!!');
+    this.getFirms(false);
+  }
+
+  onScrollUp() {
+    console.log('scrolled up!!');
   }
 }

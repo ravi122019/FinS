@@ -11,6 +11,7 @@ import { LoaderComponent } from '../shared/custom-components/loader/loader.compo
 import { TypeheadComponent } from '../shared/custom-components/typehead/typehead.component';
 import { DesignationListComponent } from './designation/designation-list/designation-list.component';
 import { ExpenseListComponent } from './expenses/expenses-list/expenses-list.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 /**
  * Custom angular notifier options
@@ -62,7 +63,8 @@ import { ExpenseListComponent } from './expenses/expenses-list/expenses-list.com
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    NotifierModule.withConfig(customNotifierOptions)
+    NotifierModule.withConfig(customNotifierOptions),
+    InfiniteScrollModule
   ],
   declarations: [
     FirmListComponent,
