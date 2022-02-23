@@ -4,8 +4,11 @@ export const API_ENDPOINT = {
     login: {
         URI: 'login/authenticate'
     },
+    logout: {
+        URI: 'login/logout'
+    },
     firm: {
-        getFirm: 'firm'
+        getFirm: 'firm/getPageList'
     },
     designation: {
         getDesignation: 'designation'

@@ -30,8 +30,10 @@ export class FirmListComponent implements OnInit, OnDestroy {
   districtList = [];
   cityList = [];
   errorMsg = '';
-  throttle = 300;
+  throttle = 100;
   isInline = false;
+  offset=0;
+  numberOfFirms = 0;
   constructor(private firmService: FirmService,
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
@@ -54,11 +56,12 @@ export class FirmListComponent implements OnInit, OnDestroy {
     this.isLoading = isInit;
     if (this.isInline) {
       return;
-    }
+    } //?limit=50000&offset=0
     this.isInline = !isInit;
-    this.subscription = this.firmService.getFirms().subscribe(firmData => {
-      this.setAddressFormat(firmData);
-      this.firmData = [...this.firmData, ...firmData];
+    this.subscription = this.firmService.getFirms(this.offset).subscribe(firmData => {
+      this.setAddressFormat(firmData.content);
+      this.numberOfFirms = firmData.totalElements;
+      this.firmData = [...this.firmData, ...firmData.content];
       this.isLoading = this.isInline = false;
     }, (error: any) => {
       console.log(error);
@@ -200,7 +203,10 @@ export class FirmListComponent implements OnInit, OnDestroy {
 
   onScrollDown() {
     console.log('scrolled down!!');
-    this.getFirms(false);
+    if (this.numberOfFirms !== 0 && this.firmData.length < this.numberOfFirms) {
+      this.offset = this.offset + 1;
+      this.getFirms(false);
+    }
   }
 
   onScrollUp() {
