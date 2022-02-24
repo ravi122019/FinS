@@ -15,7 +15,7 @@ public class AuthonticatedUserTo {
 	@JsonAlias("id")
 	private Long id;
 	
-	@JsonProperty("frimId")
+	@JsonProperty("firmId")
 	private Long firmId;
 	
 	@JsonProperty("firstName")
