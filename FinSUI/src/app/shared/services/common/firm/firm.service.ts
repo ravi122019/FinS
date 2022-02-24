@@ -11,7 +11,7 @@ export class FirmService {
   constructor(private httpService: HttpClientCoreService) { }
 
   public getFirms(offset): Observable<any> {
-    const endPoint = `${GetApiEndPoints.getFirm.getUrl()}?offset=${offset}`;
+    const endPoint = `${GetApiEndPoints.getFirm.getUrl()}/getPageList?offset=${offset}`;
     return this.httpService.get(endPoint);
   }
 

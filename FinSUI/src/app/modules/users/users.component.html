@@ -1,1 +1,50 @@
-<p>users works!</p>
+<div class="row">
+    <notifier-container></notifier-container>
+    <div class="col-md-12">
+        <!--- Complete Table -->
+        <div class="card">
+            <div class="card-body">
+                <div class="d-md-flex mt-3">
+                    <input type="text" placeholder="Search" class="form-control w-auto" [(ngModel)]="csearchTerm" />
+                    <button type="button" class="btn btn-primary ml-auto">+ Add
+                        User</button>
+                </div>
+                <div class="table-responsive" *ngIf="!isLoading">
+
+                    <table class="table table-striped no-wrap border mt-4">
+                        <thead>
+                            <tr>
+                                <th *ngFor="let item of USER_COLUMN">{{item.name}}</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of userInfo">
+                                <td *ngFor="let item of USER_COLUMN">
+                                    <ngb-highlight [result]="user[item.id]" [term]="csearchTerm"></ngb-highlight>
+                                </td>
+                                <td>
+                                    <i class="ti-pencil text-info m-r-10 pointer"></i>
+                                    <i class="ti-trash text-danger pointer"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <app-loader *ngIf="isInline" [isInline]="isInline"></app-loader>
+
+
+                    <!-- <div class="d-flex justify-content-between p-2">
+                        <ngb-pagination [(page)]="cpage" [pageSize]="cpageSize"
+                            [collectionSize]="totalLengthOfCollection"></ngb-pagination>
+                        <select class="custom-select" style="width: auto" [(ngModel)]="cpageSize">
+                            <option [ngValue]="2">2 items per page</option>
+                            <option [ngValue]="4">4 items per page</option>
+                            <option [ngValue]="6">6 items per page</option>
+                        </select>
+                    </div> -->
+                </div>
+                <app-loader *ngIf="isLoading"></app-loader>
+            </div>
+        </div>
+    </div>
+</div>

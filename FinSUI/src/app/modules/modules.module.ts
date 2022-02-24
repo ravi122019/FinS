@@ -12,6 +12,7 @@ import { TypeheadComponent } from '../shared/custom-components/typehead/typehead
 import { DesignationListComponent } from './designation/designation-list/designation-list.component';
 import { ExpenseListComponent } from './expenses/expenses-list/expenses-list.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { UsersComponent } from './users/users.component';
 
 /**
  * Custom angular notifier options
@@ -71,7 +72,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     LoaderComponent,
     TypeheadComponent,
     DesignationListComponent,
-    ExpenseListComponent
+    ExpenseListComponent,
+    UsersComponent
   ]
 })
 export class ModulesModule { }

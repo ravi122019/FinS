@@ -8,6 +8,7 @@ import { LOCATION } from 'src/app/shared/constants/common/location.constant';
 import { FIRM_COLUMN } from 'src/app/shared/constants/firm/firm.constant';
 import { MESSAGES } from 'src/app/shared/constants/messages.constant';
 import { FirmService } from 'src/app/shared/services/common/firm/firm.service';
+import { CommonUtils } from 'src/app/shared/utils/common-utils';
 @Component({
   selector: 'app-firm-list',
   templateUrl: './firm-list.component.html',
@@ -30,7 +31,7 @@ export class FirmListComponent implements OnInit, OnDestroy {
   districtList = [];
   cityList = [];
   errorMsg = '';
-  throttle = 100;
+  throttle = 300;
   isInline = false;
   offset=0;
   numberOfFirms = 0;
@@ -59,19 +60,13 @@ export class FirmListComponent implements OnInit, OnDestroy {
     } //?limit=50000&offset=0
     this.isInline = !isInit;
     this.subscription = this.firmService.getFirms(this.offset).subscribe(firmData => {
-      this.setAddressFormat(firmData.content);
+      CommonUtils.formCompleteAddress(firmData.content);
       this.numberOfFirms = firmData.totalElements;
       this.firmData = [...this.firmData, ...firmData.content];
       this.isLoading = this.isInline = false;
     }, (error: any) => {
       console.log(error);
       this.isLoading = this.isInline = false;
-    });
-  }
-
-  setAddressFormat(firmData): void {
-    firmData.forEach(element => {
-      element['fullAddress'] = `${element.address}, ${element.city}, ${element.district}, ${element.state}`;
     });
   }
 
@@ -160,6 +155,9 @@ export class FirmListComponent implements OnInit, OnDestroy {
   }
 
   handleFirmSuccess(editAddLabel): void {
+    this.numberOfFirms = 0;
+    this.offset = 0;
+    this.firmData = [];
     this.isLoading = false;
     this.closeBtnClick();
     this.getFirms(true);

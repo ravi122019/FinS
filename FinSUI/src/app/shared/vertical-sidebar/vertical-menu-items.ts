@@ -7,12 +7,14 @@ export const ROUTES: RouteInfo[] = [
     title: 'Masters',
     icon: 'cpu',
     class: 'has-arrow',
+    labelClass: 'side-badge badge badge-info',
     extralink: false,
     submenu: [{
       path: '/master/firms',
       title: 'Firm',
       icon: 'mdi mdi-adjust',
       class: '',
+      labelClass: '',
       extralink: false,
       submenu: []
     },
@@ -22,6 +24,7 @@ export const ROUTES: RouteInfo[] = [
       icon: 'mdi mdi-adjust',
       class: '',
       extralink: false,
+      labelClass: '',
       submenu: []
     },
     {
@@ -30,6 +33,7 @@ export const ROUTES: RouteInfo[] = [
       icon: 'mdi mdi-adjust',
       class: '',
       extralink: false,
+      labelClass: '',
       submenu: []
     },
     {
@@ -38,6 +42,7 @@ export const ROUTES: RouteInfo[] = [
       icon: 'mdi mdi-adjust',
       class: '',
       extralink: false,
+      labelClass: '',
       submenu: []
     }]
   },
@@ -54,6 +59,7 @@ export const ROUTES: RouteInfo[] = [
         icon: 'mdi mdi-adjust',
         class: '',
         extralink: false,
+        labelClass: '',
         submenu: []
       },
       {
@@ -62,12 +68,14 @@ export const ROUTES: RouteInfo[] = [
         icon: 'mdi mdi-adjust',
         class: '',
         extralink: false,
+        labelClass: '',
         submenu: []
       },
       {
         path: '/component/carousel',
         title: 'Carousel',
         icon: 'mdi mdi-adjust',
+        labelClass: '',
         class: '',
         extralink: false,
         submenu: []
@@ -76,6 +84,7 @@ export const ROUTES: RouteInfo[] = [
         path: '/component/dropdown',
         title: 'Dropdown',
         icon: 'mdi mdi-adjust',
+        labelClass: '',
         class: '',
         extralink: false,
         submenu: []
@@ -84,6 +93,7 @@ export const ROUTES: RouteInfo[] = [
         path: '/component/modal',
         title: 'Modal',
         icon: 'mdi mdi-adjust',
+        labelClass: '',
         class: '',
         extralink: false,
         submenu: []
@@ -92,6 +102,7 @@ export const ROUTES: RouteInfo[] = [
         path: '/component/pagination',
         title: 'Pagination',
         icon: 'mdi mdi-adjust',
+        labelClass: '',
         class: '',
         extralink: false,
         submenu: []
@@ -100,6 +111,7 @@ export const ROUTES: RouteInfo[] = [
         path: '/component/poptool',
         title: 'Popover & Tooltip',
         icon: 'mdi mdi-adjust',
+        labelClass: '',
         class: '',
         extralink: false,
         submenu: []
@@ -109,6 +121,7 @@ export const ROUTES: RouteInfo[] = [
         title: 'Progressbar',
         icon: 'mdi mdi-adjust',
         class: '',
+        labelClass: '',
         extralink: false,
         submenu: []
       },
@@ -118,6 +131,7 @@ export const ROUTES: RouteInfo[] = [
         icon: 'mdi mdi-adjust',
         class: '',
         extralink: false,
+        labelClass: '',
         submenu: []
       },
       {
@@ -125,6 +139,7 @@ export const ROUTES: RouteInfo[] = [
         title: 'Tabs',
         icon: 'mdi mdi-adjust',
         class: '',
+        labelClass: '',
         extralink: false,
         submenu: []
       },
@@ -132,6 +147,7 @@ export const ROUTES: RouteInfo[] = [
         path: '/component/timepicker',
         title: 'Timepicker',
         icon: 'mdi mdi-adjust',
+        labelClass: '',
         class: '',
         extralink: false,
         submenu: []
@@ -140,6 +156,7 @@ export const ROUTES: RouteInfo[] = [
         path: '/component/buttons',
         title: 'Button',
         icon: 'mdi mdi-adjust',
+        labelClass: '',
         class: '',
         extralink: false,
         submenu: []
@@ -148,6 +165,7 @@ export const ROUTES: RouteInfo[] = [
         path: '/component/card',
         title: 'Card',
         icon: 'mdi mdi-adjust',
+        labelClass: '',
         class: '',
         extralink: false,
         submenu: []

@@ -1,0 +1,2 @@
+export const USER_COLUMN = [
+    { id: 'fullName', name: 'Name' }, { id: 'mobileNumber', name: 'Mobile Number' }, { id: 'emailId', name: 'Email' }, { id: 'aadhar', name: 'Aadhar No.' }, { id: 'fullAddress', name: 'Address' }];
