@@ -27,7 +27,6 @@ export class FirmListComponent implements OnInit, OnDestroy {
   private firmId: number;
   isServiceError = false;
   locationData = LOCATION;
-  statesArr = ['Maharashtra'];
   districtList = [];
   cityList = [];
   errorMsg = '';
@@ -57,7 +56,7 @@ export class FirmListComponent implements OnInit, OnDestroy {
     this.isLoading = isInit;
     if (this.isInline) {
       return;
-    } //?limit=50000&offset=0
+    }
     this.isInline = !isInit;
     this.subscription = this.firmService.getFirms(this.offset).subscribe(firmData => {
       CommonUtils.formCompleteAddress(firmData.content);

@@ -1,4 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NotifierService } from 'angular-notifier';
 import { Subscription } from 'rxjs';
 import { MESSAGES } from 'src/app/shared/constants/messages.constant';
 import { USER_COLUMN } from 'src/app/shared/constants/user/user.constant';
@@ -16,7 +19,12 @@ export class UsersComponent implements OnInit, OnDestroy {
   userInfo = [];
   readonly USER_COLUMN = USER_COLUMN;
   readonly MESSAGES = MESSAGES;
-  constructor(private userService: UserService) { }
+  isServiceError = false;
+  userId;
+  constructor(private userService: UserService,
+    private modalService: NgbModal,
+    private formBuilder: FormBuilder,
+    private notifier: NotifierService) { }
 
   ngOnInit(): void {
     this.getUsers();
@@ -38,6 +46,33 @@ export class UsersComponent implements OnInit, OnDestroy {
       console.log(error);
       this.isLoading = false;
     });
+  }
+
+  showDeleteUser(targetModal: NgbModal, userId: number): void {
+    this.modalService.open(targetModal, {
+      centered: true,
+      backdrop: 'static'
+    });
+    this.userId = userId;
+    this.isServiceError = false;
+  }
+
+  confirmDeleteUser(): void {
+    this.isLoading = true;
+    this.subscription = this.userService.deleteUser(this.userId).subscribe(response => {
+      this.isLoading = false;
+      this.closeBtnClick();
+      this.getUsers();
+      this.notifier.notify( 'success', MESSAGES.user.delete );
+    }, (error: any) => {
+      console.log(error);
+      this.isLoading = false;
+      this.isServiceError = true;
+    })
+  }
+
+  closeBtnClick() {
+    this.modalService.dismissAll();
   }
 
   _csearchTerm: string = '';

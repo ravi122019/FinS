@@ -8,6 +8,11 @@ export const MESSAGES = {
         update: 'Firm Data Updated Successfully!',
         delete: 'Firm Deleted Successfully!'
     },
+    user: {
+        add: 'User Created Successfully!',
+        update: 'User Data Updated Successfully!',
+        delete: 'User Deleted Successfully!'
+    },
     designation: {
         add: 'Designation Created Successfully!',
         update: 'Designation Data Updated Successfully!',

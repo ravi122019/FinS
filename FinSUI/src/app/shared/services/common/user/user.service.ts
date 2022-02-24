@@ -14,4 +14,9 @@ export class UserService {
     const endPoint = `${GetApiEndPoints.getUser.getUrl()}`;
     return this.httpService.get(endPoint);
   }
+
+  public deleteUser(userId: number): Observable<any> {
+    const endPoint = `${GetApiEndPoints.getUser.getUrl()}/${userId}`;
+    return this.httpService.delete(endPoint);
+  }
 }
