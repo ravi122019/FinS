@@ -6,7 +6,7 @@
             <div class="card-body">
                 <div class="d-md-flex mt-3">
                     <input type="text" placeholder="Search" class="form-control w-auto" [(ngModel)]="csearchTerm" />
-                    <button type="button" class="btn btn-primary ml-auto">+ Add
+                    <button type="button" class="btn btn-primary ml-auto" (click)="openUserModal(editModal, null)">+ Add
                         User</button>
                 </div>
                 <div class="table-responsive" *ngIf="!isLoading">
@@ -48,6 +48,109 @@
         </div>
     </div>
 </div>
+
+<!--- Modal for complete Table -->
+<ng-template #editModal let-modal>
+
+    <div class="modal-header">
+        <h5 class="modal-title" id="editLabel">{{editAddLabel}} User</h5>
+        <button type="button" class="close" (click)="closeBtnClick()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <ngb-alert *ngIf="isServiceError" [type]="'danger'" (closed)="isServiceError=false">{{errorMsg}}</ngb-alert>
+        <form [formGroup]="editUser" (ngSubmit)="saveUser()">
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="First Name">
+                </div>
+                <div class="col-sm-4">
+                    <label for="middleName">Middle Name</label>
+                    <input type="text" class="form-control" id="middleName" formControlName="middleName" placeholder="Middle Name">
+                </div>
+                <div class="col-sm-4">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Last Name">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <label for="mobileNumber">Mobile Number</label>
+                    <input type="text" class="form-control" id="mobileNumber" formControlName="mobileNumber" placeholder="Mobile Number">
+                </div>
+                <div class="col-sm-4">
+                    <label for="emailId">Email</label>
+                    <input type="text" class="form-control" id="emailId" formControlName="emailId" placeholder="Email">
+                </div>
+                <div class="col-sm-4">
+                    <label for="dateOfBirth">Date Of Birth</label>
+                    <input ngbDatepicker (click)="datePicker.toggle()" #datePicker="ngbDatepicker" formControlName="dateOfBirth" placeholder="yyyy-mm-dd" [maxDate]="maxDate">
+                    <!-- <ngb-datepicker class="form-control" id="dateOfBirth" formControlName="dateOfBirth" [maxDate]="{year: 2022, month: 4, day: 22}"></ngb-datepicker> -->
+                    <!-- <input type="text" class="form-control" id="dateOfBirth" formControlName="dateOfBirth" placeholder="Date Of Birth"> -->
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <label for="aadhar">Adhar Card Number</label>
+                    <input type="text" class="form-control" id="aadhar" formControlName="aadhar" placeholder="Adhar Card Number">
+                </div>
+                <div class="col-sm-4">
+                    <label for="bloodGroup">Blood Group</label>
+                    <app-typehead controlName="bloodGroup" iid="bloodGroup" placeholder="Select Blood Group"
+                        [formGroup]="editUser" [isRequired]="true" [dropdownData]="BLOOD_GROUPS" ngDefaultControl></app-typehead>
+                </div>
+                <div class="col-sm-4">
+                    <label for="designation">Designation</label>
+                    <app-typehead controlName="designation" iid="designation" placeholder="Select Designation"
+                        [formGroup]="editUser" [isRequired]="true" [dropdownData]="designationData" ngDefaultControl></app-typehead>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <label for="state">State</label>
+                    <app-typehead controlName="state" iid="state" placeholder="Select State" [formGroup]="editUser"
+                        [isRequired]="true" ngDefaultControl [dropdownData]="statesArr"
+                        (valueChange)='stateChangeEvent($event)'></app-typehead>
+                </div>
+                <div class="col-sm-4">
+                    <label for="district">District</label>
+                    <app-typehead controlName="district" iid="district" placeholder="Select District"
+                        [formGroup]="editUser" [isRequired]="true" [dropdownData]="districtList"
+                        (valueChange)='districtChangeEvent($event)' ngDefaultControl></app-typehead>
+                </div>
+                <div class="col-sm-4">
+                    <label for="city">City</label>
+                    <app-typehead controlName="city" iid="city" [dropdownData]="cityList" placeholder="Select City"
+                        [formGroup]="editUser" [isRequired]="true" ngDefaultControl></app-typehead>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" formControlName="address" id="address">
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" (click)="closeBtnClick()">Close</button>
+
+                <button *ngIf="!isLoading" type="submit" class="btn btn-primary"
+                    [disabled]="editUser.invalid">Save</button>
+                <div *ngIf="isLoading" class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+<!--- Modal for complete Table -->
 
 <!--- Modal for complete Table -->
 <ng-template #deleteUserModal let-modal>
