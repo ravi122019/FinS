@@ -5,7 +5,7 @@ import { NotifierService } from 'angular-notifier';
 import { Subscription } from 'rxjs';
 import { LOCATION } from 'src/app/shared/constants/common/location.constant';
 import { MESSAGES } from 'src/app/shared/constants/messages.constant';
-import { BLOOD_GROUPS, USER_COLUMN } from 'src/app/shared/constants/user/user.constant';
+import { BLOOD_GROUPS, DESIGNATIONS, USER_COLUMN } from 'src/app/shared/constants/user/user.constant';
 import { DesignationService } from 'src/app/shared/services/common/designation/designation.service';
 import { UserService } from 'src/app/shared/services/common/user/user.service';
 import { CommonUtils } from 'src/app/shared/utils/common-utils';
@@ -22,6 +22,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   readonly USER_COLUMN = USER_COLUMN;
   readonly BLOOD_GROUPS = BLOOD_GROUPS;
   readonly MESSAGES = MESSAGES;
+  readonly DESIGNATIONS = DESIGNATIONS;
   isServiceError = false;
   userId;
   errorMsg = '';
@@ -31,7 +32,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   statesArr = ['Maharashtra'];
   districtList = [];
   cityList = [];
-  designationData = [];
+  designationData = DESIGNATIONS.designationList;
   maxDate;
 
   constructor(private userService: UserService,
@@ -63,26 +64,38 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   openUserModal(targetModal: NgbModal, firm: any) {
     this.isServiceError = false;
-
-    this.isLoading = true;
-    this.subscription = this.designationService.getDesignations().subscribe(designationData => {
-      this.designationData = designationData.map(element => element.name);
-      this.isLoading = false;
+    if (this.designationData.length) {
       this.modalService.open(targetModal, {
         centered: true,
         size: 'lg',
         backdrop: 'static'
       });
-  
       if (firm == null) {
         this.editAddLabel = 'Add';
         this.editUser.reset();
       }
-    }, (error: any) => {
-      console.log(error);
-      this.notifier.notify('error', MESSAGES.serviceError );
-      this.isLoading = false;
-    });
+    } else {
+      this.isLoading = true;
+      this.subscription = this.designationService.getDesignations().subscribe(designationData => {
+        this.designationData = designationData.map(element => element.name);
+        DESIGNATIONS.designationList = this.designationData;
+        this.isLoading = false;
+        this.modalService.open(targetModal, {
+          centered: true,
+          size: 'lg',
+          backdrop: 'static'
+        });
+    
+        if (firm == null) {
+          this.editAddLabel = 'Add';
+          this.editUser.reset();
+        }
+      }, (error: any) => {
+        console.log(error);
+        this.notifier.notify('error', MESSAGES.serviceError );
+        this.isLoading = false;
+      });
+    }
     // if (firm != null) {
     //   this.districtList = Object.keys(this.locationData);
     //   this.cityList = this.locationData[firm.district];
