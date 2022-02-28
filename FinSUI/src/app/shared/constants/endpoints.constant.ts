@@ -18,6 +18,9 @@ export const API_ENDPOINT = {
     },
     user: {
         getUsers: 'user'
+    },
+    location: {
+        getLocations: 'location'
     }
 }
 
@@ -38,5 +41,8 @@ export class GetApiEndPoints {
     }
     public static getUser = {
         getUrl: () => `${environment.baseURI}${API_ENDPOINT.user.getUsers}`
+    }
+    public static getLocation = {
+        getUrl: () => `${environment.baseURI}${API_ENDPOINT.location.getLocations}`
     }
 }

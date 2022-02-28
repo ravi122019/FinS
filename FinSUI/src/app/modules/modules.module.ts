@@ -13,6 +13,7 @@ import { DesignationListComponent } from './designation/designation-list/designa
 import { ExpenseListComponent } from './expenses/expenses-list/expenses-list.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { UsersComponent } from './users/users.component';
+import { LocationListComponent } from './location/location-list/location-list.component';
 
 /**
  * Custom angular notifier options
@@ -73,7 +74,8 @@ import { UsersComponent } from './users/users.component';
     TypeheadComponent,
     DesignationListComponent,
     ExpenseListComponent,
-    UsersComponent
+    UsersComponent,
+    LocationListComponent
   ]
 })
 export class ModulesModule { }

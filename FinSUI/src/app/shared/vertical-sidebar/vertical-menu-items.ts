@@ -44,6 +44,15 @@ export const ROUTES: RouteInfo[] = [
       extralink: false,
       labelClass: '',
       submenu: []
+    },
+    {
+      path: '/master/locations',
+      title: 'Locations',
+      icon: 'mdi mdi-adjust',
+      class: '',
+      extralink: false,
+      labelClass: '',
+      submenu: []
     }]
   },
   {

@@ -23,5 +23,10 @@ export const MESSAGES = {
         update: 'Expense Type Data Updated Successfully!',
         delete: 'Expense Type Deleted Successfully!'
     },
+    location: {
+        add: 'Location Created Successfully!',
+        update: 'Location Data Updated Successfully!',
+        delete: 'Location Deleted Successfully!'
+    },
     serviceError: 'Service Error, Please Contact System Administrator!'
 }

@@ -125,8 +125,7 @@ export class DesignationListComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.isServiceError = true;
       })
-    }
-     
+    }   
   }
 
   closeBtnClick() {
