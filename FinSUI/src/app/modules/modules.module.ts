@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { ModulesRoutes } from './modules.routing';
 import { FirmListComponent } from './firm/firm-list/firm-list.component';
@@ -66,7 +66,8 @@ import { LocationListComponent } from './location/location-list/location-list.co
     ReactiveFormsModule,
     NgbModule,
     NotifierModule.withConfig(customNotifierOptions),
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    NgbDatepickerModule
   ],
   declarations: [
     FirmListComponent,

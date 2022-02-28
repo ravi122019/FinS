@@ -19,7 +19,7 @@ export class FirmListComponent implements OnInit, OnDestroy {
   readonly FIRM_COLUMN = FIRM_COLUMN;
   readonly MESSAGES = MESSAGES;
   private subscription: Subscription;
-  editAddLabel: string = 'Edit';
+  editAddLabel = 'Edit';
   editClient: FormGroup;
   isLoading = true;
   private editedFirm;
@@ -27,8 +27,9 @@ export class FirmListComponent implements OnInit, OnDestroy {
   private firmId: number;
   isServiceError = false;
   locationData = LOCATION;
+  statesArr = ['Maharashtra'];
   districtList = [];
-  cityList = [];
+  cityList = [] ;
   errorMsg = '';
   throttle = 300;
   isInline = false;
@@ -66,6 +67,7 @@ export class FirmListComponent implements OnInit, OnDestroy {
     }, (error: any) => {
       console.log(error);
       this.isLoading = this.isInline = false;
+      this.notifier.notify('error', MESSAGES.serviceError );
     });
   }
 
