@@ -1,17 +1,12 @@
 package com.fs.pojo;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -31,16 +26,19 @@ public class Role implements Serializable{
 	@Column(name = "Name")
 	private String name;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "roles_menus", 
-	joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"), 
-	inverseJoinColumns = @JoinColumn(name = "menus_id", referencedColumnName = "id"))
-	private List<Menus> menus;
+	/*
+	 * @ManyToMany(fetch = FetchType.EAGER)
+	 * 
+	 * @JoinTable(name = "roles_menus", joinColumns = @JoinColumn(name = "role_id",
+	 * referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name =
+	 * "menus_id", referencedColumnName = "id")) private List<Menus> menus;
+	 */
 
 	public Long getId() {
 		return id;
 	}
 
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -53,13 +51,11 @@ public class Role implements Serializable{
 		this.name = name;
 	}
 
-	public List<Menus> getMenus() {
-		return menus;
-	}
-
-	public void setMenus(List<Menus> menus) {
-		this.menus = menus;
-	}
+	/*
+	 * public List<Menus> getMenus() { return menus; }
+	 * 
+	 * public void setMenus(List<Menus> menus) { this.menus = menus; }
+	 */
 	
 	
 

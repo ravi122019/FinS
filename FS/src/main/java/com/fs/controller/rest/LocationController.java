@@ -22,12 +22,12 @@ public class LocationController extends BaseController<LocationTo, Location>{
 	}
 
 	@Override
-	protected Class getBusinessObject() {
+	protected Class<LocationTo> getBusinessObject() {
 		return LocationTo.class;
 	}
 
 	@Override
-	protected Class getDomainObject() {
+	protected Class<Location> getDomainObject() {
 		return Location.class;
 	}
 

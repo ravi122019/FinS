@@ -32,8 +32,8 @@ public class UserTo extends BaseTo{
 	@JsonProperty("mobileNumber")
 	private String mobileNumber;
 	
-	@JsonProperty("emialId")
-	private String emialId;
+	@JsonProperty("emailId")
+	private String emailId;
 	
 	@JsonProperty("aadhar")
 	private String aadhar;
@@ -145,12 +145,12 @@ public class UserTo extends BaseTo{
 		this.mobileNumber = mobileNumber;
 	}
 
-	public String getEmialId() {
-		return emialId;
+	public String getEmailId() {
+		return emailId;
 	}
 
-	public void setEmialId(String emialId) {
-		this.emialId = emialId;
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
 
 	public String getAadhar() {

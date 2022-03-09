@@ -8,8 +8,15 @@ import com.fs.to.base.BaseTo;
 @Validated
 public class LocationTo extends BaseTo{
 	
+	@JsonProperty("locationId")
+	@JsonAlias("id")
+	private Long id;
+
 	@JsonProperty("state")
 	private String state;
+
+	@JsonProperty("district")
+	private String district;
 	
 	@JsonProperty("city")
 	private String city;
@@ -17,9 +24,7 @@ public class LocationTo extends BaseTo{
 	@JsonProperty("name")
 	private String name;
 	
-	@JsonProperty("locationId")
-	@JsonAlias("id")
-	private Long id;
+	
 
 	public Long getId() {
 		return id;
@@ -51,5 +56,13 @@ public class LocationTo extends BaseTo{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 }

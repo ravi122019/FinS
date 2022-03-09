@@ -29,6 +29,10 @@ public class Location extends FirmAwareImpl{
 	@Column(name = "City")
 	private String city;
 	
+	@NotNull(message = "District should not be null")
+	@Column(name = "District")
+	private String district;
+	
 	@NotNull(message = "Loaction Name should not be null")
 	@Column(name = "Name")
 	private String name;
@@ -63,5 +67,13 @@ public class Location extends FirmAwareImpl{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 }

@@ -1,7 +1,5 @@
 package com.fs.to;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,8 +12,9 @@ public class RoleTo {
 	@JsonProperty("name")
 	private String name;
 	
-	@JsonProperty("menus")
-	private List<MenusTo> menus;
+	/*
+	 * @JsonProperty("menus") private List<MenusTo> menus;
+	 */
 
 	public Long getId() {
 		return id;
@@ -33,11 +32,9 @@ public class RoleTo {
 		this.name = name;
 	}
 
-	public List<MenusTo> getMenus() {
-		return menus;
-	}
-
-	public void setMenus(List<MenusTo> menus) {
-		this.menus = menus;
-	}
+	/*
+	 * public List<MenusTo> getMenus() { return menus; }
+	 * 
+	 * public void setMenus(List<MenusTo> menus) { this.menus = menus; }
+	 */
 }

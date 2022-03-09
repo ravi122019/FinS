@@ -61,7 +61,7 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService{
 			user.setState(firm.getState());
 			user.setCity(firm.getCity());
 			user.setAddress(firm.getAddress());
-			user.setEmialId(firm.getEmailId());
+			user.setEmailId(firm.getEmailId());
 			user.setDistrict(firm.getDistrict());
 			user.setMobileNumber(firm.getMobileNumber());
 			user.setFirm(firm);

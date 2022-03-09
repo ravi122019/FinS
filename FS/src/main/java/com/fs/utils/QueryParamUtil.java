@@ -11,6 +11,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 
 import com.fs.context.FSContext;
 import com.fs.pojo.base.FirmAware;
@@ -70,10 +71,8 @@ public final class QueryParamUtil {
 	
 	
 	public static Pageable getPageable(Map<String, String> map) {
-		//TODO:limit=value
-		//offset=value
-		//sort=
-		return PageRequest.of(0, 25, Sort.by("id"));
+		int offset = Integer.parseInt(map.get("offset")) ;
+		return PageRequest.of(offset, 3, Sort.by(Direction.DESC, "modifiedTimeStamp"));
 		
 	}
 	//TODO:We will remove this method and will add advice for this

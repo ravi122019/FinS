@@ -40,7 +40,6 @@ public class User extends FirmAwareImpl{
 	@Column(name = "password")
 	private String password;
 	
-	@NotNull(message = "ConfirmPassword should not be null")
 	@Column(name = "ConfirmPassword")
 	private String confirmPassword;
 	
@@ -56,8 +55,8 @@ public class User extends FirmAwareImpl{
 	@Column(name = "MobileNumber" , nullable = false, unique = false)
 	private String mobileNumber;
 	
-	@Column(name = "EmialId" , nullable = false, unique = false)
-	private String emialId;
+	@Column(name = "EmailId" , nullable = false, unique = false)
+	private String emailId ;
 	
 	@Column(name = "Aadhar" , nullable = true, unique = false)
 	private String aadhar;
@@ -107,7 +106,7 @@ public class User extends FirmAwareImpl{
 
 	@Transient
 	public Set<String> getUserRoles() {
-		if (!this.roles.isEmpty()) {
+		if (null != this.roles && !this.roles.isEmpty()) {
 			return this.roles.stream().map(Role::getName).collect(Collectors.toSet());
 		}
 		return new HashSet<String>();
@@ -177,12 +176,12 @@ public class User extends FirmAwareImpl{
 		this.mobileNumber = mobileNumber;
 	}
 
-	public String getEmialId() {
-		return emialId;
+	public String getEmailId() {
+		return emailId;
 	}
 
-	public void setEmialId(String emialId) {
-		this.emialId = emialId;
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
 
 	public String getAadhar() {
