@@ -6,6 +6,7 @@ import { DESIGNATION_COLUMN } from 'src/app/shared/constants/designation/designa
 import { MESSAGES } from 'src/app/shared/constants/messages.constant';
 import { DesignationService } from 'src/app/shared/services/common/designation/designation.service';
 import { Subscription } from 'rxjs';
+import { DESIGNATIONS } from 'src/app/shared/constants/user/user.constant';
 @Component({
   selector: 'app-designation-list',
   templateUrl: './designation-list.component.html',
@@ -43,6 +44,7 @@ export class DesignationListComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.subscription = this.designationService.getDesignations().subscribe(designationData => {
       this.designationData = designationData;
+      DESIGNATIONS.designationList = designationData.map(element => element.name);
       this.isLoading = false;
     }, (error: any) => {
       console.log(error);
@@ -125,8 +127,7 @@ export class DesignationListComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.isServiceError = true;
       })
-    }
-     
+    }   
   }
 
   closeBtnClick() {

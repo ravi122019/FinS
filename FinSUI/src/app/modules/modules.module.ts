@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { ModulesRoutes } from './modules.routing';
 import { FirmListComponent } from './firm/firm-list/firm-list.component';
@@ -12,6 +12,8 @@ import { TypeheadComponent } from '../shared/custom-components/typehead/typehead
 import { DesignationListComponent } from './designation/designation-list/designation-list.component';
 import { ExpenseListComponent } from './expenses/expenses-list/expenses-list.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { UsersComponent } from './users/users.component';
+import { LocationListComponent } from './location/location-list/location-list.component';
 
 /**
  * Custom angular notifier options
@@ -64,14 +66,17 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     ReactiveFormsModule,
     NgbModule,
     NotifierModule.withConfig(customNotifierOptions),
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    NgbDatepickerModule
   ],
   declarations: [
     FirmListComponent,
     LoaderComponent,
     TypeheadComponent,
     DesignationListComponent,
-    ExpenseListComponent
+    ExpenseListComponent,
+    UsersComponent,
+    LocationListComponent
   ]
 })
 export class ModulesModule { }

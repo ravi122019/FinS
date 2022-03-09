@@ -6,27 +6,27 @@ import { HttpClientCoreService } from '../../core/http-client/http-client-core.s
 @Injectable({
   providedIn: 'root'
 })
-export class FirmService {
+export class UserService {
 
   constructor(private httpService: HttpClientCoreService) { }
 
-  public getFirms(offset): Observable<any> {
-    const endPoint = `${GetApiEndPoints.getFirm.getUrl()}/getPageList?offset=${offset}`;
+  public getUsers(): Observable<any> {
+    const endPoint = `${GetApiEndPoints.getUser.getUrl()}`;
     return this.httpService.get(endPoint);
   }
 
-  public postFirms(payload): Observable<any> {
-    const endPoint = GetApiEndPoints.getFirm.getUrl();
+  public addUser(payload): Observable<any> {
+    const endPoint = GetApiEndPoints.getUser.getUrl();
     return this.httpService.post(endPoint, payload);
   }
 
-  public edirFirms(payload): Observable<any> {
-    const endPoint = `${GetApiEndPoints.getFirm.getUrl()}/${payload.firmId}`;
+  public editUser(payload): Observable<any> {
+    const endPoint = `${GetApiEndPoints.getUser.getUrl()}/${payload.userId}`;
     return this.httpService.put(endPoint, payload);
   }
 
-  public deleteFirms(firmId: number): Observable<any> {
-    const endPoint = `${GetApiEndPoints.getFirm.getUrl()}/${firmId}`;
+  public deleteUser(userId: number): Observable<any> {
+    const endPoint = `${GetApiEndPoints.getUser.getUrl()}/${userId}`;
     return this.httpService.delete(endPoint);
   }
 }

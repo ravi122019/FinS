@@ -6,27 +6,27 @@ import { HttpClientCoreService } from '../../core/http-client/http-client-core.s
 @Injectable({
   providedIn: 'root'
 })
-export class FirmService {
+export class LocationService {
 
   constructor(private httpService: HttpClientCoreService) { }
 
-  public getFirms(offset): Observable<any> {
-    const endPoint = `${GetApiEndPoints.getFirm.getUrl()}/getPageList?offset=${offset}`;
+  public getLocations(offset): Observable<any> {
+    const endPoint = `${GetApiEndPoints.getLocation.getUrl()}/getPageList?offset=${offset}`;
     return this.httpService.get(endPoint);
   }
 
-  public postFirms(payload): Observable<any> {
-    const endPoint = GetApiEndPoints.getFirm.getUrl();
+  public postLocations(payload): Observable<any> {
+    const endPoint = GetApiEndPoints.getLocation.getUrl();
     return this.httpService.post(endPoint, payload);
   }
 
-  public edirFirms(payload): Observable<any> {
-    const endPoint = `${GetApiEndPoints.getFirm.getUrl()}/${payload.firmId}`;
+  public editLocations(payload): Observable<any> {
+    const endPoint = `${GetApiEndPoints.getLocation.getUrl()}/${payload.id}`;
     return this.httpService.put(endPoint, payload);
   }
 
-  public deleteFirms(firmId: number): Observable<any> {
-    const endPoint = `${GetApiEndPoints.getFirm.getUrl()}/${firmId}`;
+  public deleteLocations(id: number): Observable<any> {
+    const endPoint = `${GetApiEndPoints.getLocation.getUrl()}/${id}`;
     return this.httpService.delete(endPoint);
   }
 }

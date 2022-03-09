@@ -8,6 +8,7 @@ import { LOCATION } from 'src/app/shared/constants/common/location.constant';
 import { FIRM_COLUMN } from 'src/app/shared/constants/firm/firm.constant';
 import { MESSAGES } from 'src/app/shared/constants/messages.constant';
 import { FirmService } from 'src/app/shared/services/common/firm/firm.service';
+import { CommonUtils } from 'src/app/shared/utils/common-utils';
 @Component({
   selector: 'app-firm-list',
   templateUrl: './firm-list.component.html',
@@ -18,7 +19,7 @@ export class FirmListComponent implements OnInit, OnDestroy {
   readonly FIRM_COLUMN = FIRM_COLUMN;
   readonly MESSAGES = MESSAGES;
   private subscription: Subscription;
-  editAddLabel: string = 'Edit';
+  editAddLabel = 'Edit';
   editClient: FormGroup;
   isLoading = true;
   private editedFirm;
@@ -28,10 +29,12 @@ export class FirmListComponent implements OnInit, OnDestroy {
   locationData = LOCATION;
   statesArr = ['Maharashtra'];
   districtList = [];
-  cityList = [];
+  cityList = [] ;
   errorMsg = '';
   throttle = 300;
   isInline = false;
+  offset=0;
+  numberOfFirms = 0;
   constructor(private firmService: FirmService,
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
@@ -56,19 +59,15 @@ export class FirmListComponent implements OnInit, OnDestroy {
       return;
     }
     this.isInline = !isInit;
-    this.subscription = this.firmService.getFirms().subscribe(firmData => {
-      this.setAddressFormat(firmData);
-      this.firmData = [...this.firmData, ...firmData];
+    this.subscription = this.firmService.getFirms(this.offset).subscribe(firmData => {
+      CommonUtils.formCompleteAddress(firmData.content);
+      this.numberOfFirms = firmData.totalElements;
+      this.firmData = [...this.firmData, ...firmData.content];
       this.isLoading = this.isInline = false;
     }, (error: any) => {
       console.log(error);
       this.isLoading = this.isInline = false;
-    });
-  }
-
-  setAddressFormat(firmData): void {
-    firmData.forEach(element => {
-      element['fullAddress'] = `${element.address}, ${element.city}, ${element.district}, ${element.state}`;
+      this.notifier.notify('error', MESSAGES.serviceError );
     });
   }
 
@@ -157,6 +156,9 @@ export class FirmListComponent implements OnInit, OnDestroy {
   }
 
   handleFirmSuccess(editAddLabel): void {
+    this.numberOfFirms = 0;
+    this.offset = 0;
+    this.firmData = [];
     this.isLoading = false;
     this.closeBtnClick();
     this.getFirms(true);
@@ -200,7 +202,10 @@ export class FirmListComponent implements OnInit, OnDestroy {
 
   onScrollDown() {
     console.log('scrolled down!!');
-    this.getFirms(false);
+    if (this.numberOfFirms !== 0 && this.firmData.length < this.numberOfFirms) {
+      this.offset = this.offset + 1;
+      this.getFirms(false);
+    }
   }
 
   onScrollUp() {
